@@ -1,10 +1,12 @@
 // Program.swift
 // Created by
 // Created on
+// swift run
+// ^ to run the file (the run button is broken)
 
 import Foundation
 
-let tast = 2
+let test = 2
 
 print("Dylan does make cool profile pictures :)")
 print("hello")
