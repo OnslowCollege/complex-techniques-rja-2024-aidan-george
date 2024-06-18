@@ -7,9 +7,9 @@
                 "swift"
             ],
             "name": "Debug OCProgram",
-            "program": "${workspaceFolder:SwiftTemplate}/.build/debug/OCProgram",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/debug/OCProgram",
             "args": [],
-            "cwd": "${workspaceFolder:SwiftTemplate}",
+            "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
             "preLaunchTask": "swift: Build Debug OCProgram"
         },
         {
@@ -19,10 +19,34 @@
                 "swift"
             ],
             "name": "Release OCProgram",
-            "program": "${workspaceFolder:SwiftTemplate}/.build/release/OCProgram",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/release/OCProgram",
             "args": [],
-            "cwd": "${workspaceFolder:SwiftTemplate}",
+            "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
             "preLaunchTask": "swift: Build Release OCProgram"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
+            "name": "Debug Reversi",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}\\.build\\debug\\Reversi.exe",
+            "preLaunchTask": "swift: Build Debug Reversi"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
+            "name": "Release Reversi",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}\\.build\\release\\Reversi.exe",
+            "preLaunchTask": "swift: Build Release Reversi"
         }
     ]
 }

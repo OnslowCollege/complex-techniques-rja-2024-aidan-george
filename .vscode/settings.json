@@ -1,0 +1,51 @@
+{
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.showWelcomeOnInstall": false,
+    "editor.wordWrap": "on",
+    "editor.inlayHints.enabled": "off",
+    "editor.fontSize": 16,
+    "editor.rulers": [
+        120
+    ],
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    },
+    "gitdoc.commitValidationLevel": "none",
+    "gitdoc.enabled": true,
+    "actionButtons": {
+        "commands": [
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "$(run) Run file",
+                "useVsCodeApi": true,
+                "command": "workbench.action.debug.start" // This is executed in the terminal.
+            },
+            {
+                "cwd": "{workspaceFolder}",
+                "name": "$(pencil) Format file",
+                "useVsCodeApi": true,
+                "command": "editor.action.formatDocument"
+            },
+            {
+                "name": "$(terminal-view-icon) New Terminal",
+                "useVsCodeApi": true,
+                "command": "workbench.action.terminal.newInActiveWorkspace"
+            },
+            {
+                "name": "$(terminal-kill) Kill all Terminals",
+                "useVsCodeApi": true,
+                "command": "workbench.action.terminal.killAll"
+            }
+        ],
+        "defaultColor": "none",
+        "reloadButton": "↻",
+        "loadNpmCommands": false
+    }
+}
