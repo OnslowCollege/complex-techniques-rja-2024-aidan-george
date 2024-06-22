@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "Reversi",
+    platforms: [.macOS("10.15")],
     dependencies: [
         .package(url: "https://github.com/AparokshaUI/Adwaita", from: "0.1.0")
     ],
