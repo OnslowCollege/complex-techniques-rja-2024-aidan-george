@@ -23,9 +23,8 @@
         "commands": [
             {
                 "cwd": "${workspaceFolder}",
-                "name": "$(run) Run file",
-                "useVsCodeApi": true,
-                "command": "workbench.action.debug.start" // This is executed in the terminal.
+                "name": "$(run) Run project",
+                "command": "swift run" // This is executed in the terminal.
             },
             {
                 "cwd": "{workspaceFolder}",

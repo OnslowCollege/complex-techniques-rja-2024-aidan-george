@@ -6,11 +6,11 @@
             "sourceLanguages": [
                 "swift"
             ],
-            "name": "Debug OCProgram",
-            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/debug/OCProgram",
+            "name": "Debug Reversi",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}\\.build\\x86_64-unknown-windows-msvc\\debug\\Reversi.exe",
             "args": [],
             "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
-            "preLaunchTask": "swift: Build Debug OCProgram"
+            "preLaunchTask": "swift: Build Debug Reversi"
         },
         {
             "type": "lldb",
@@ -18,11 +18,11 @@
             "sourceLanguages": [
                 "swift"
             ],
-            "name": "Release OCProgram",
-            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/release/OCProgram",
+            "name": "Release Reversi",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}\\.build\\release\\Reversi.exe",
             "args": [],
             "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
-            "preLaunchTask": "swift: Build Release OCProgram"
+            "preLaunchTask": "swift: Build Release Reversi"
         },
         {
             "type": "lldb",
