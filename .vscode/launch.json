@@ -7,7 +7,7 @@
                 "swift"
             ],
             "name": "Debug Reversi",
-            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/debug/Reversi",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}\\.build\\debug\\Reversi.exe",
             "args": [],
             "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
             "preLaunchTask": "swift: Build Debug Reversi"
@@ -19,7 +19,7 @@
                 "swift"
             ],
             "name": "Release Reversi",
-            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/release/Reversi",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}\\.build\\release\\Reversi.exe",
             "args": [],
             "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
             "preLaunchTask": "swift: Build Release Reversi"
