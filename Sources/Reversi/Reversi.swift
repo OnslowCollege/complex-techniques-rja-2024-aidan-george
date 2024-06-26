@@ -11,7 +11,7 @@ struct Reversi: App {
 
     var scene: Scene {
         Window(id: "main") { window in
-            Text("Reversi")
+
                 .padding()
                 .topToolbar {
                     ToolbarView(app: app, window: window)
