@@ -8,14 +8,15 @@ import { HousingLocationComponent } from './housing-location/housing-location.co
   imports: [RouterOutlet, HomeComponent, HousingLocationComponent],
   styleUrl: './app.component.scss',
   template: `
-    <main>
-      <header class="brand-name">
-        <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
-      </header>
-      <section class="content">
-        <app-home></app-home>
-      </section>
-    </main>
+    <section>
+      <form>
+        <input type="text" placeholder="Filter by city" />
+        <button class="primary" type="button">Search</button>
+      </form>
+    </section>
+    <section class="results">
+      <app-housing-location></app-housing-location>
+    </section>
   `,
 })
 export class AppComponent {
