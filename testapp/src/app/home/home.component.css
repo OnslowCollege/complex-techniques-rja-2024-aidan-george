@@ -20,7 +20,7 @@ button {
     padding: 10px;
     border: solid 1px var(--primary-color);
     background: var(--primary-color);
-    color: white;
+    color: rgb(46, 29, 29);
     border-radius: 8px;
 }
 
