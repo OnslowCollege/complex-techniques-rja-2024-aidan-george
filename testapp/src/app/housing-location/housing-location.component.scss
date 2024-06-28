@@ -4,7 +4,7 @@ background: var(--accent-color);
     padding-bottom: 30px;
 }
 .listing-heading {
-color: var(--primary-color);
+color: rgb(46, 29, 29);
     padding: 10px 20px 0 20px;
 }
 .listing-photo {
@@ -22,7 +22,7 @@ content: url("/assets/location-pin.svg") / "";
 section.listing a {
 padding-left: 20px;
     text-decoration: none;
-    color: var(--primary-color);
+    color: rgb(46, 29, 29);
 }
 section.listing a::after {
 content: "\203A";
