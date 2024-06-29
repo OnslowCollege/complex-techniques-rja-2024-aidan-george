@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../housinglocation';
-
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HousingLocationComponent],
+  imports: [CommonModule, HousingLocationComponent],
   template: `
     <section>
       <form>
@@ -14,19 +14,106 @@ import { HousingLocation } from '../housinglocation';
       </form>
     </section>
     <section class="results">
-      <app-housing-location [housingLocation]="housingLocation"></app-housing-location>
+      <app-housing-location
+        *ngFor="let housingLocation of housingLocationList"
+        [housingLocation]="housingLocation"
+      ></app-housing-location>
     </section>
   `,
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  housingLocation: HousingLocation = {
-    id: 9999,
-    name: 'Test Home',
-    city: 'Test city',
-    state: 'ST',
-    availableUnits: 99,
-    wifi: true,
-    laundry: false,
-  };
+  readonly baseUrl = 'https://angular.dev/assets/tutorials/common';
+  housingLocationList: HousingLocation[] = [
+    {
+      id: 0,
+      name: 'Acme Fresh Start Housing',
+      city: 'Chicago',
+      state: 'IL',
+      availableUnits: 4,
+      wifi: true,
+      laundry: true,
+    },
+    {
+      id: 1,
+      name: 'A113 Transitional Housing',
+      city: 'Santa Monica',
+      state: 'CA',
+      availableUnits: 0,
+      wifi: false,
+      laundry: true,
+    },
+    {
+      id: 2,
+      name: 'Warm Beds Housing Support',
+      city: 'Juneau',
+      state: 'AK',
+      availableUnits: 1,
+      wifi: false,
+      laundry: false,
+    },
+    {
+      id: 3,
+      name: 'Homesteady Housing',
+      city: 'Chicago',
+      state: 'IL',
+      availableUnits: 1,
+      wifi: true,
+      laundry: false,
+    },
+    {
+      id: 4,
+      name: 'Happy Homes Group',
+      city: 'Gary',
+      state: 'IN',
+      availableUnits: 1,
+      wifi: true,
+      laundry: false,
+    },
+    {
+      id: 5,
+      name: 'Hopeful Apartment Group',
+      city: 'Oakland',
+      state: 'CA',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    },
+    {
+      id: 6,
+      name: 'Seriously Safe Towns',
+      city: 'Oakland',
+      state: 'CA',
+      availableUnits: 5,
+      wifi: true,
+      laundry: true,
+    },
+    {
+      id: 7,
+      name: 'Hopeful Housing Solutions',
+      city: 'Oakland',
+      state: 'CA',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    },
+    {
+      id: 8,
+      name: 'Seriously Safe Towns',
+      city: 'Oakland',
+      state: 'CA',
+      availableUnits: 10,
+      wifi: false,
+      laundry: false,
+    },
+    {
+      id: 9,
+      name: 'Capital Safe Towns',
+      city: 'Portland',
+      state: 'OR',
+      availableUnits: 6,
+      wifi: true,
+      laundry: true,
+    },
+  ];
 }
