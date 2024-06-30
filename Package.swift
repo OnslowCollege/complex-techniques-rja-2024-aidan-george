@@ -11,7 +11,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "Reversi",
-            dependencies: [.product(name: "Adwaita", package: "Adwaita"), .product(name: "OCGUI", package: "OCGUI")],
+            dependencies: [.product(name: "Adwaita", package: "Adwaita")],
             swiftSettings: [
                 .unsafeFlags(["-I", "C:\\gtk4\\include\\cairo", "-I", "C:\\gtk4\\include\\epoxy", "-I", "C:\\gtk4\\include\\freetype2", "-I", "C:\\gtk4\\include\\fribidi", "-I", "C:\\gtk4\\include\\gdk-pixbuf-2.0", "-I", "C:\\gtk4\\include\\gio-win32-2.0", "-I", "C:\\gtk4\\include\\glib-2.0", "-I", "C:\\gtk4\\include\\graphene-1.0", "-I", "C:\\gtk4\\include\\gtk-4.0", "-I", "C:\\gtk4\\include\\harfbuzz", "-I", "C:\\gtk4\\include\\libadwaita-1", "-I", "C:\\gtk4\\include\\libpng16", "-I", "C:\\gtk4\\include\\librsvg-2.0", "-I", "C:\\gtk4\\include\\libxml2", "-I", "C:\\gtk4\\include\\pango-1.0", "-I", "C:\\gtk4\\include\\pixman-1", "-I", "C:\\gtk4\\lib\\glib-2.0\\include", "-I", "C:\\gtk4\\lib\\graphene-1.0\\include"], .when(platforms: [.windows]))
             ],
