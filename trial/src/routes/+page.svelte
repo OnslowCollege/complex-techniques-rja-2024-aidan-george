@@ -1,3 +1,5 @@
 <script lang="ts">
-    import { emoji }
+    import { emoji } from "./emojis"
 </script>
+
+Hello
