@@ -32,7 +32,10 @@
 
 import Adwaita
 
+@main
+
 struct DiceDemo: View {
+
 
     @State private var number: Int?
 
