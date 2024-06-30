@@ -2,4 +2,6 @@
     import { emoji } from "./emojis"
 </script>
 
-Hello
+start (idle)
+playing
+paused 
