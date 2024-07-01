@@ -4,4 +4,7 @@
 
 start (idle)
 playing
+playing.matching
 paused 
+won 
+lost
