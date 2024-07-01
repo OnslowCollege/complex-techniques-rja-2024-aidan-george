@@ -8,3 +8,5 @@ playing.matching
 paused 
 won 
 lost
+
+data-state={state}
