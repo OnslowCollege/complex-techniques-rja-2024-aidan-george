@@ -2,13 +2,6 @@
     import { emoji } from "./emojis"
 
     type State = 'start' | 'playing' | 'paused' | 'won' | 'lost'
+
+    let state: State = 'start'
 </script>
-
-start (idle)
-playing
-playing.matching
-paused 
-won 
-lost
-
-data-state={state}
