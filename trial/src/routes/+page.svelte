@@ -1,5 +1,7 @@
 <script lang="ts">
     import { emoji } from "./emojis"
+
+    type State = 'start' | 'playing' | 'paused' | 'won' | 'lost'
 </script>
 
 start (idle)
