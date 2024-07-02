@@ -39,9 +39,9 @@
 {#if state === 'playing'}
     <div class="cards">
         {#each grid as card, cardIndex}
-        <div class="button">
+        <button class="card">
             <div>{card}</div>
-        </div>
+        </button>
         {/each}
     </div>
 {/if}
