@@ -27,6 +27,22 @@
 
     }
 
+    function selectCards(cardIndex: number) {
+        selected = selected.concat(cardIndex)
+    }
+
+    function matchCards() {
+        const [first, second] = selected
+
+        if (grid[first] === grid[second]) {
+            matches = matches.concat(grid[first])
+        }
+
+        selected = []
+    }
+    
+    function gameWon() {}
+
     $: selected.length === 2 && matchCards()
 
     $: maxMatches === matches.length && gameWon()
