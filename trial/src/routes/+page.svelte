@@ -69,5 +69,9 @@
         width: 140px;
         font-size: 4rem;
         background-color: var(--bg-2);
+
+        &.selected {
+            border: 4px spood var(--border);
+        }
     }
 </style>
