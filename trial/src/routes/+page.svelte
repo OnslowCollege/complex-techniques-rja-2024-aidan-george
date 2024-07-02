@@ -99,7 +99,7 @@
         background-color: var(--bg-2);
 
         &.selected {
-            border: 4px spood var(--border);
+            border: 4px solid var(--border);
         }
     }
 </style>
