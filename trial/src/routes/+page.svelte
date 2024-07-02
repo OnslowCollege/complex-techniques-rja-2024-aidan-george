@@ -60,11 +60,15 @@
 {#if state === 'playing'}
     <div class="cards">
         {#each grid as card, cardIndex}
-        <button 
-        class="card"
-        on:click={() => selectCards(cardIndex)}
-        >
-            <div>{card}</div>
+        {@const isSelected =  selected.includes(cardIndex)}
+        {@const isSelectedOrMatched =  selected.includes(cardIndex) || matches.includes(card)}
+        {@const match =  matches.includes(card)}
+
+        <button class="card"
+        class:selected={isSelected}
+        disabled={isSelectedOrMatched}
+        on:click={() => selectCards(cardIndex)}>
+            <div class:match>{card}</div>
         </button>
         {/each}
     </div>
