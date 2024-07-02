@@ -58,6 +58,12 @@
 {/if}
 
 {#if state === 'playing'}
+    <div class="matches">
+        {#each matches as card}
+            <div>{card}</div>
+        {/each}
+    </div>
+
     <div class="cards">
         {#each grid as card, cardIndex}
         {@const isSelected =  selected.includes(cardIndex)}
@@ -106,5 +112,12 @@
             transition: opacity 0.3s ease-out;
             opacity: 0.4;
         }
+    }
+
+    .matches {
+        display: flex;
+        gap: 1rem;
+        margin-block: 2rem;
+        font-size: 3rem;
     }
 </style>
