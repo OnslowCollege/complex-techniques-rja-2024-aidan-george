@@ -38,7 +38,7 @@
             matches = matches.concat(grid[first])
         }
 
-        selected = []
+        setTimeout(() => (selected = []), 300)
     }
     
     function gameWon() {
