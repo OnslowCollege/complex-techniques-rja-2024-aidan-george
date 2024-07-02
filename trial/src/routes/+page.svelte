@@ -48,4 +48,10 @@
 
 {#if state === 'lost'}
     <h1>You lost! </h1>
-{/if}
+    <button on:click = {() => state = 'playing'}>Play again</button>
+{/if}   
+
+{#if state === 'won'}
+    <h1>You win! </h1>
+    <button on:click = {() => state = 'playing'}>Play again</button>
+{/if}  
