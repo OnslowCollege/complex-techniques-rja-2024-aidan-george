@@ -101,5 +101,10 @@
         &.selected {
             border: 4px solid var(--border);
         }
+
+        & .match {
+            transition: opacity 0.3s ease-out;
+            opacity: 0.4;
+        }
     }
 </style>
