@@ -55,3 +55,12 @@
     <h1>You win! </h1>
     <button on:click = {() => state = 'playing'}>Play again</button>
 {/if}  
+
+
+<style>
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.4rem;
+    }
+</style>
