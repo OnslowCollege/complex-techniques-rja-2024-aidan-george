@@ -45,3 +45,7 @@
         {/each}
     </div>
 {/if}
+
+{#if state === 'lost'}
+    <h1>You lost! </h1>
+{/if}
