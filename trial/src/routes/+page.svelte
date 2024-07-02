@@ -35,3 +35,13 @@
     <h1>Matching game</h1>
     <button on:click = {() => state = 'playing'}>Play</button>
 {/if}
+
+{#if state === 'playing'}
+    <div class="cards">
+        {#each grid as card, cardIndex}
+        <div class="button">
+            <div>{card}</div>
+        </div>
+        {/each}
+    </div>
+{/if}
