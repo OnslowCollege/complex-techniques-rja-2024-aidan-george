@@ -27,7 +27,9 @@
 
     }
 
-    console.log(grid)
+    $: selected.length === 2 && matchCards()
+
+    $: maxMatches === matches.length && gameWon()
 </script>
 
 
