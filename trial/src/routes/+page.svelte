@@ -41,11 +41,14 @@
         selected = []
     }
     
-    function gameWon() {}
+    function gameWon() {
+        state = 'won'
+    }
 
     $: selected.length === 2 && matchCards()
-
     $: maxMatches === matches.length && gameWon()
+
+    $: console.log(state, selected, matches)
 </script>
 
 
@@ -57,7 +60,10 @@
 {#if state === 'playing'}
     <div class="cards">
         {#each grid as card, cardIndex}
-        <button class="card">
+        <button 
+        class="card"
+        on:click={() => selectCards(cardIndex)}
+        >
             <div>{card}</div>
         </button>
         {/each}
