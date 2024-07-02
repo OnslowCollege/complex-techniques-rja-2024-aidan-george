@@ -6,6 +6,9 @@
     let state: State = 'start'
     let size = 20
     let grid = createGrid()
+    let maxMatches = grid.length / 2 
+    let selected: number[] = []
+    let matches: string[] = []
 
     function createGrid() {
         let cards = new Set<string>()
@@ -26,3 +29,9 @@
 
     console.log(grid)
 </script>
+
+
+{#if state === 'start'}
+    <h1>Matching game</h1>
+    <button on:click = {() => state = 'playing'}>Play</button>
+{/if}
