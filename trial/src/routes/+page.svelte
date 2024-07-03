@@ -98,6 +98,9 @@
 
 <svelte:window on:keydown={pauseGame}/>
 
+{#if state === 'paused'}
+    <h1>Game paused</h1>
+{/if}
 
 {#if state === 'start'}
     <h1>Matching game</h1>
