@@ -14,8 +14,9 @@
 
     function startGameTimer() {
         function countdown() {
-            state !== 'paused'
+            state !== 'paused' && (time -= 1)
         }
+        timerId = setInterval(countdown, 1000)
     }
 
     function createGrid() {
@@ -51,6 +52,10 @@
     
     function gameWon() {
         state = 'won'
+    }
+
+    function gameLost() {
+        state = 'lost'
     }
 
     $: selected.length === 2 && matchCards()
