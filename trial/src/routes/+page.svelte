@@ -10,7 +10,7 @@
     let selected: number[] = []
     let matches: string[] = []
     let timerId: number | null = null
-    let time = 20
+    let time = 60
 
     function startGameTimer() {
         function countdown() {
@@ -57,7 +57,7 @@
         selected = []
         matches = []
         timerId = null
-        time = 20
+        time = 60
     }
     
     function gameWon() {
@@ -108,9 +108,11 @@
 
         <button class="card"
         class:selected={isSelected}
+        class:flip={isSelectedOrMatched}
         disabled={isSelectedOrMatched}
-        on:click={() => selectCards(cardIndex)}>
-            <div class:match>{card}</div>
+        on:click={() => selectCards(cardIndex)}
+        >
+            <div class="back" class:match>{card}</div>
         </button>
         {/each}
     </div>
@@ -139,9 +141,25 @@
         width: 140px;
         font-size: 4rem;
         background-color: var(--bg-2);
+        transition: rotate 0.3s ease-out;
+        transform-style: preserve-3d;
 
         &.selected {
             border: 4px solid var(--border);
+        }
+
+        &.flip {
+            rotate: y 180deg;
+            pointer-events: none;
+        }
+
+        & .back {
+            position: absolute;
+            inset:0 ;
+            display: grid;
+            place-content: center;
+            backface-visibility: hidden;
+            rotate: y 180deg;
         }
 
         & .match {
