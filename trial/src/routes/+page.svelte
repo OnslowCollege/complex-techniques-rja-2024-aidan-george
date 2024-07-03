@@ -49,13 +49,25 @@
 
         setTimeout(() => (selected = []), 300)
     }
+
+    function resetGame() {
+        timerId && clearInterval(timerId)
+        grid = createGrid()
+        maxMatches = grid.length / 2
+        selected = []
+        matches = []
+        timerId = null
+        time = 20
+    }
     
     function gameWon() {
         state = 'won'
+        resetGame()
     }
 
     function gameLost() {
         state = 'lost'
+        resetGame()
     }
 
     $: if (state === 'playing') {
