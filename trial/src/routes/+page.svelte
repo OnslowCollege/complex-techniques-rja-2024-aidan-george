@@ -58,8 +58,14 @@
         state = 'lost'
     }
 
+    $: if (state === 'playing') {
+        !timerId && startGameTimer()
+    }
+
+
     $: selected.length === 2 && matchCards()
     $: maxMatches === matches.length && gameWon()
+    $: time === 0 && gameLost()
 
     $: console.log(state, selected, matches)
 </script>
@@ -71,6 +77,11 @@
 {/if}
 
 {#if state === 'playing'}
+
+    <h1 class="timer" class:pulse={time <= 10}>
+        {time}
+    </h1>
+
     <div class="matches">
         {#each matches as card}
             <div>{card}</div>
@@ -132,5 +143,20 @@
         gap: 1rem;
         margin-block: 2rem;
         font-size: 3rem;
+    }
+
+    .timer {
+        transition: color 0.3s ease;
+    }
+
+    .pulse {
+        color: var(--pulse);
+        animation: pulse 1s infinite ease;
+    }
+
+    @keyframes pulse {
+        to {
+            scale: 1.4;
+        }
     }
 </style>
