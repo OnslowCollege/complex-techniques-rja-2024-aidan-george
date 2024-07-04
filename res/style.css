@@ -353,10 +353,10 @@ select {
     grid-row: 1;
     font-size: 14pt;
     font-family: "Lucida Grande", "Lucida Sans", "Helvetica", "Arial", sans-serif;
-    min-height: 1.75em;
-    max-height: 1.75em;
-    padding: 0 2em;
-    min-width: 6em;
+    min-height: 3em;
+    max-height: 3em;
+    padding: 0 0em;
+    min-width: 3em;
     border: 0;
     border-radius: 1000px;
     position: relative !important;
@@ -377,7 +377,7 @@ select {
 }
 
 select:disabled {
-    opacity: 0.9;
+    opacity: 1;
     filter: saturate(0);
 }
 
