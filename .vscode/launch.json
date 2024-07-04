@@ -23,6 +23,30 @@
             "args": [],
             "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
             "preLaunchTask": "swift: Build Release Reversi"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
+            "name": "Debug OCProgram",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/debug/OCProgram",
+            "preLaunchTask": "swift: Build Debug OCProgram"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}",
+            "name": "Release OCProgram",
+            "program": "${workspaceFolder:complex-techniques-rja-2024-daniel-dylan-kellan}/.build/release/OCProgram",
+            "preLaunchTask": "swift: Build Release OCProgram"
         }
     ]
 }

@@ -1,23 +1,23 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
 
-import Adwaita
+//
+//  main.swift
+//  OCProgram
+//
+//  Created by Kellan Van Koughnet on 1/01/24.
+//
 
-@main
-struct Reversi: App {
+import Foundation
+import OCGUI
 
-    let id = "nz.school.OnslowCollege.Reversi"
-    var app: GTUIApp!
+class TestApp : OCApp {
+    // Buttons used in the gui.
+    var testButton = OCButton(text: "Test")
 
-    var scene: Scene {
-        Window(id: "main") { window in
-            Text("Reversi")
-                .padding()
-                .topToolbar {
-                    ToolbarView(app: app, window: window)
-                }
-        }
-        .defaultSize(width: 450, height: 300)
+    override open func main(app: OCAppDelegate) -> OCControl {
+        // Returns the fully laid out GUI.
+        return OCHBox(controls: [testButton])
     }
-
 }
+
+
+TestApp().start()
