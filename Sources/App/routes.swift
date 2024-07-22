@@ -17,6 +17,10 @@ func routes(_ app: Application) throws {
         "This is where you will log in wooooo!"
     }
 
+    app.get("signup.leaf") { req async -> String in
+        "This is where you will log in wooooo!"
+    }
+
     try app.register(collection: TodoController())
 }
 
