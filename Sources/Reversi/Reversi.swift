@@ -104,5 +104,3 @@ class TestApp : OCApp {
         return Grid
     }
 }
-
-TestApp().start()
