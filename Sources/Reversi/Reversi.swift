@@ -78,7 +78,7 @@ class TestApp : OCApp {
 
     
 
-    let Red = OCImageView(filename: String {RedDot.jpg})
+    let Red = OCImageView(filename: res/RedDot.jpg)
 
     // var buttons: [[OCButton]] = []
     // for _ in 0..<8{
