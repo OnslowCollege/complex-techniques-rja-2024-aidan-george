@@ -351,7 +351,7 @@ body> :nth-of-type(2) {
 button,
 select {
     grid-row: 1;
-    font-size: 34pt;
+    font-size: 14pt;
     font-family: "Lucida Grande", "Lucida Sans", "Helvetica", "Arial", sans-serif;
     min-height: 3em;
     max-height: 3em;
