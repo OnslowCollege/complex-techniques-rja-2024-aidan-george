@@ -11,7 +11,7 @@ import OCGUI
 
 class TestApp : OCApp {
     // Buttons used in the gui.
-    var tileAA = OCButton(text: "")
+    var tileAA = OCButton(text: "🟢")
     var tileAB = OCButton(text: "")
     var tileAC = OCButton(text: "")
     var tileAD = OCButton(text: "")
