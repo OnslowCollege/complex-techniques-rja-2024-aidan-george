@@ -78,7 +78,7 @@ class TestApp : OCApp {
 
     
 
-    let Red = OCImageView(filename: res/RedDot.jpg)
+    let Red = OCImageView(filename: "RedDot.png")
 
     // var buttons: [[OCButton]] = []
     // for _ in 0..<8{
@@ -101,6 +101,7 @@ class TestApp : OCApp {
         let TileButtonsRowSeven = OCHBox(controls: [tileGA, tileGB, tileGC, tileGD, tileGE, tileGF, tileGG, tileGH])
         let TileButtonsRowEight = OCHBox(controls: [tileHA, tileHB, tileHC, tileHD, tileHE, tileHF, tileHG, tileHH])
         let Grid = OCVBox(controls: [TileButtonsRowOne, TileButtonsRowTwo, TileButtonsRowThree, TileButtonsRowFour, TileButtonsRowFive, TileButtonsRowSix, TileButtonsRowSeven, TileButtonsRowEight])
+
 
         // for row in 0..<8{
         //     buttonRows.append(OCHBox(controls: buttons[row]))
