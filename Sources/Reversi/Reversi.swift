@@ -76,6 +76,13 @@ class TestApp : OCApp {
     var tileHG = OCImageView(filename: "images/RedDot.png")
     var tileHH = OCImageView(filename: "images/RedDot.png")
 
+    let Tiles: [OCImageView] = [tileAA, tileAB, tileAC]
+
+    /// Event function for when the "next" button is pressed.
+    func tilePressed(tile: OCControlClickable) {
+        // If a flash card has not been shown previous to this, will assume the user is starting the flashcard app.
+        }
+
     // var buttons: [[OCImageView]] = []
     // for _ in 0..<8{
     //     var buttonRow: [OCImageView] = []
@@ -88,6 +95,8 @@ class TestApp : OCApp {
     override open func main(app: OCAppDelegate) -> OCControl {
         // Returns the fully laid out GUI.
         // var buttonRows: [OCControl] = []
+        self.tileAA.onClick(self.tilePressed)
+
         let TileButtonsRowOne = OCHBox(controls: [tileAA, tileAB, tileAC, tileAD, tileAE, tileAF, tileAG, tileAH])
         let TileButtonsRowTwo = OCHBox(controls: [tileBA, tileBB, tileBC, tileBD, tileBE, tileBF, tileBG, tileBH])
         let TileButtonsRowThree = OCHBox(controls: [tileCA, tileCB, tileCC, tileCD, tileCE, tileCF, tileCG, tileCH])
