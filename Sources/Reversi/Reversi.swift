@@ -76,10 +76,6 @@ class TestApp : OCApp {
     var tileHG = OCImageView(filename: "images/RedDot.png")
     var tileHH = OCImageView(filename: "images/RedDot.png")
 
-    
-
-    let Red = OCImageView(filename: "images/RedDot.png")
-
     // var buttons: [[OCImageView]] = []
     // for _ in 0..<8{
     //     var buttonRow: [OCImageView] = []
