@@ -76,11 +76,10 @@ class TestApp : OCApp {
     var tileHG = OCImageView(filename: "images/RedDot.png")
     var tileHH = OCImageView(filename: "images/RedDot.png")
 
-    let Tiles: [OCImageView] = [tileAA, tileAB, tileAC]
-
     /// Event function for when the "next" button is pressed.
     func tilePressed(tile: OCControlClickable) {
         // If a flash card has not been shown previous to this, will assume the user is starting the flashcard app.
+        tileAA.filename = "images/SquareOutline.png"
         }
 
     // var buttons: [[OCImageView]] = []
@@ -95,7 +94,46 @@ class TestApp : OCApp {
     override open func main(app: OCAppDelegate) -> OCControl {
         // Returns the fully laid out GUI.
         // var buttonRows: [OCControl] = []
-        self.tileAA.onClick(self.tilePressed)
+        let Tiles: [OCImageView] = [tileAA, tileAB, tileAC]
+
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAB.onClick(self.tilePressed)
+        self.tilesAC.onClick(self.tilePressed)
+        self.tilesAD.onClick(self.tilePressed)
+        self.tilesAE.onClick(self.tilePressed)
+        self.tilesAF.onClick(self.tilePressed)
+        self.tilesAG.onClick(self.tilePressed)
+        self.tilesAH.onClick(self.tilePressed)
+        self.tilesBA.onClick(self.tilePressed)
+        self.tilesBB.onClick(self.tilePressed)
+        self.tilesBC.onClick(self.tilePressed)
+        self.tilesBB.onClick(self.tilePressed)
+        self.tilesBD.onClick(self.tilePressed)
+        self.tilesBE.onClick(self.tilePressed)
+        self.tilesBF.onClick(self.tilePressed)
+        self.tilesBG.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+        self.tilesAA.onClick(self.tilePressed)
+
 
         let TileButtonsRowOne = OCHBox(controls: [tileAA, tileAB, tileAC, tileAD, tileAE, tileAF, tileAG, tileAH])
         let TileButtonsRowTwo = OCHBox(controls: [tileBA, tileBB, tileBC, tileBD, tileBE, tileBF, tileBG, tileBH])
