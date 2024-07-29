@@ -1,1 +1,1 @@
-TestApp().start()
+ReversiApp().start()
