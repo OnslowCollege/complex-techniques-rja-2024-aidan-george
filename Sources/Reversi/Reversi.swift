@@ -428,7 +428,7 @@ class ReversiApp : OCApp {
     /// Event function for when the "next" button is pressed.
     func tilePressed(tile: OCControlClickable) {
         // If a flash card has not been shown previous to this, will assume the user is starting the flashcard app.
-        tileAA.filename = "images/SquareOutline.png"
+        // tileAA.filename = "images/SquareOutline.png"
         }
 
     // var buttons: [[OCImageView]] = []
