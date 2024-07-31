@@ -236,7 +236,7 @@ body> :nth-of-type(2) {
     box-shadow: 0 0 32px rgba(0, 0, 0, 0.8);
     margin-top: 32px;
     transition: height 1s;
-    width: 1024px;
+    width: 530px;  /* Originally 1024 */
     max-height: fit-content !important;
     padding: 32px !important;
     position: absolute;
@@ -259,7 +259,7 @@ body> :nth-of-type(2) {
     border: 1px solid rgba(0, 0, 0, 0.2);
     background-color: rgba(0, 0, 0, 0.05);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1);
-    height: 100%;
+    height: fit-content;  /* Originally 100% */
     justify-content: start !important;
 }
 
