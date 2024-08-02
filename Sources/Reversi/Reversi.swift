@@ -292,6 +292,8 @@ func easyAI(board: Board) -> [Int]{
     return legalMoves[Int.random(in: 0..<legalMoves.count)]
 }
 
+var turnIndicator: OCLabel = OCLabel(text: "red")
+
 // var userX = 0
 // var userY = 0
 // var whiteUser = true
@@ -408,7 +410,7 @@ class ReversiApp : OCApp {
             }
             buttonRows.append(OCHBox(controls: controlsRow))
         }
-        let Grid = OCVBox(controls: buttonRows)
+        let Grid = OCVBox(controls: buttonRows, turnIndicator)
         return Grid
     }
 }
