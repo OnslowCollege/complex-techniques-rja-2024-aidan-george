@@ -46,21 +46,6 @@ struct Board{
         return self.grid[y][x]
     }
 
-    // func printBoard(){
-    //     let pieceSymbols = ["⬛", "🟦", "🟥"]
-    //     for row in grid{
-    //         var text = ""
-    //         for piece in row{
-    //             text += pieceSymbols[piece] + " "
-    //         }
-    //         print(text)
-    //     }
-
-    //     if (self.isGameOver()){
-    //         print("Game Over, \(pieceSymbols[self.gameWinner]) won")
-    //     }
-    // }
-
     mutating func changeTurn(){
         self.playerTurn = !self.playerTurn
     }
@@ -291,44 +276,6 @@ func easyAI(board: Board) -> [Int]{
     let legalMoves = board.getLegalMoves()
     return legalMoves[Int.random(in: 0..<legalMoves.count)]
 }
-
-
-// var userX = 0
-// var userY = 0
-// var whiteUser = true
-// var squareInputX = 0
-// var squareInputY = 0
-// var board = Board()
-// board.initialise()
-// board.setStartBoard()
-// while true{
-//     board.printBoard()
-//     let move = easyAI(board: board)
-//     userX = move[0]
-//     userY = move[1]
-    // while true{
-    //     squareInputX = 0
-    //     squareInputX = Int(Input(prompt: "0 - 7 (Z)"))!
-    //     squareInputY = Int(Input(prompt: "0 - 7 (X)"))!
-
-    //     if squareInputX >= 0 && squareInputX <= 7 && squareInputY >= 0 && squareInputY <= 7{
-    //         userX = squareInputX
-    //         userY = squareInputY
-    //         break
-    //     }
-    //     else{
-    //         print("stupid")
-            
-    //     }
-    // }
-
-    // board.placePiece(x: userX, y: userY, whitePiece: board.playerTurn)
-    // board.changeTurn()
-//     board.doMove(x: userX, y: userY)
-//     print()
-// }
-// board.printBoard()
-
 
 class ReversiApp : OCApp {
     struct Tile{
