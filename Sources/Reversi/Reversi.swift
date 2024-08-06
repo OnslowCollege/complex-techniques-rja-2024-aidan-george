@@ -354,6 +354,7 @@ class ReversiApp : OCApp {
     /// Event function for when the "ResetButton" button is pressed.
     func ResetButtonPressed(button: OCControlClickable) {
         board.reset()
+        redrawTiles()
     }
 
 
