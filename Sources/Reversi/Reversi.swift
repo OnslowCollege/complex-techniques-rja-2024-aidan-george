@@ -277,6 +277,8 @@ func easyAI(board: Board) -> [Int]{
     return legalMoves[Int.random(in: 0..<legalMoves.count)]
 }
 
+let ResetButton: OCButton = OCButton(text: "Reset Board")
+
 class ReversiApp : OCApp {
     struct Tile{
         let x: Int
