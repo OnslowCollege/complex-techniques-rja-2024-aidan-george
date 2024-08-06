@@ -277,9 +277,9 @@ func easyAI(board: Board) -> [Int]{
     return legalMoves[Int.random(in: 0..<legalMoves.count)]
 }
 
-let ResetButton: OCButton = OCButton(text: "Reset Board")
-
 class ReversiApp : OCApp {
+
+    let ResetButton: OCButton = OCButton(text: "Reset Board")
     struct Tile{
         let x: Int
         let y: Int
@@ -341,8 +341,17 @@ class ReversiApp : OCApp {
         return ""
     }
 
+    /// Event function for when the "ResetButton" button is pressed.
+    func ResetButtonPressed(button: OCControlClickable) {
+        resetBoard()
+        redrawTiles()
+    }
+
 
     override open func main(app: OCAppDelegate) -> OCControl {
+
+        // Event for when the "ResetButton" button is pressed.
+        self.ResetButton.onClick(self.ResetButtonPressed)
 
         for row in self.tiles{
             for tile in row{
