@@ -270,12 +270,21 @@ struct Board{
         }
 
     }
+    mutating func reset(){
+        /// resets the board
+        self.initialise()
+        self.setStartBoard()
+        self.playerTurn = true
+        self.gameOver = false
+        self.gameWinner = 0
+    }
 }
 
 func easyAI(board: Board) -> [Int]{
     let legalMoves = board.getLegalMoves()
     return legalMoves[Int.random(in: 0..<legalMoves.count)]
 }
+
 
 class ReversiApp : OCApp {
 
@@ -333,6 +342,7 @@ class ReversiApp : OCApp {
             }
         }
     }
+    
 
 
     func Input(prompt: String) -> String {
@@ -343,8 +353,7 @@ class ReversiApp : OCApp {
 
     /// Event function for when the "ResetButton" button is pressed.
     func ResetButtonPressed(button: OCControlClickable) {
-        resetBoard()
-        redrawTiles()
+        board.reset()
     }
 
 
