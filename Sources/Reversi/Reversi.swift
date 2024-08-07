@@ -403,7 +403,7 @@ class ReversiApp : OCApp {
             buttonRows.append(OCHBox(controls: controlsRow))
         }
         let Grid = OCVBox(controls: buttonRows)
-        let Program = OCVBox(controls: [pieceCountLabel, Grid, ResetButton])
+        let Program = OCVBox(controls: [winnerStatusLabel, Grid, ResetButton])
         return Program
     }
 }
