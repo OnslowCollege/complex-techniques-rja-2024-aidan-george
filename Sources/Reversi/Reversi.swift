@@ -289,6 +289,8 @@ func easyAI(board: Board) -> [Int]{
 class ReversiApp : OCApp {
 
     let ResetButton: OCButton = OCButton(text: "Reset Board")
+
+    var pieceCountLabel: OCLabel = OCLabel(text: "")
     struct Tile{
         let x: Int
         let y: Int
@@ -359,6 +361,22 @@ class ReversiApp : OCApp {
 
 
     override open func main(app: OCAppDelegate) -> OCControl {
+        var whitePieceCount = 0
+        var blackPieceCount = 0
+        for x in 0..<board.colum{
+            for y in 0..<board.rows{
+                let pieceType = board.getPieceAt(x: x, y: y)
+                if (pieceType == 1){
+                    // white piece
+                    whitePieceCount += 1
+                }
+                if (pieceType == 2){
+                    // black piece
+                    blackPieceCount += 1
+                }
+            }
+        }
+        pieceCountLabel.text = "White: \(whitePieceCount)  Black: \(blackPieceCount)"
 
         // Event for when the "ResetButton" button is pressed.
         self.ResetButton.onClick(self.ResetButtonPressed)
@@ -378,7 +396,7 @@ class ReversiApp : OCApp {
             buttonRows.append(OCHBox(controls: controlsRow))
         }
         let Grid = OCVBox(controls: buttonRows)
-        let Program = OCVBox(controls: [Grid, ResetButton])
+        let Program = OCVBox(controls: [pieceCountLabel, Grid, ResetButton])
         return Program
     }
 }
