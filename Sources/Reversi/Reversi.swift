@@ -291,6 +291,8 @@ class ReversiApp : OCApp {
     let ResetButton: OCButton = OCButton(text: "Reset Board")
 
     var pieceCountLabel: OCLabel = OCLabel(text: "")
+
+    var winnerStatusLabel: OCLabel = OCLabel(text: "")
     struct Tile{
         let x: Int
         let y: Int
@@ -303,6 +305,11 @@ class ReversiApp : OCApp {
                 self.app.board.doMove(x: x, y: y)
             }
             self.app.redrawTiles()
+            app.board.checkIsGameOver()
+            let GameStatus: Bool = app.board.isGameOver()
+            if GameStatus == true {
+                app.winnerStatusLabel.text = String(app.board.gameWinner)
+            }
         }
     }
 
@@ -361,22 +368,22 @@ class ReversiApp : OCApp {
 
 
     override open func main(app: OCAppDelegate) -> OCControl {
-        var whitePieceCount = 0
-        var blackPieceCount = 0
-        for x in 0..<board.colum{
-            for y in 0..<board.rows{
-                let pieceType = board.getPieceAt(x: x, y: y)
-                if (pieceType == 1){
-                    // white piece
-                    whitePieceCount += 1
-                }
-                if (pieceType == 2){
-                    // black piece
-                    blackPieceCount += 1
-                }
-            }
-        }
-        pieceCountLabel.text = "White: \(whitePieceCount)  Black: \(blackPieceCount)"
+        // var whitePieceCount = 0
+        // var blackPieceCount = 0
+        // for x in 0..<board.colum{
+        //     for y in 0..<board.rows{
+        //         let pieceType = board.getPieceAt(x: x, y: y)
+        //         if (pieceType == 1){
+        //             // white piece
+        //             whitePieceCount += 1
+        //         }
+        //         if (pieceType == 2){
+        //             // black piece
+        //             blackPieceCount += 1
+        //         }
+        //     }
+        // }
+        // pieceCountLabel.text = "White: \(whitePieceCount)  Black: \(blackPieceCount)"
 
         // Event for when the "ResetButton" button is pressed.
         self.ResetButton.onClick(self.ResetButtonPressed)
