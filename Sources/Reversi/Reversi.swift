@@ -308,7 +308,15 @@ class ReversiApp : OCApp {
             app.board.checkIsGameOver()
             let GameStatus: Bool = app.board.isGameOver()
             if GameStatus == true {
-                app.winnerStatusLabel.text = String(app.board.gameWinner)
+                if app.board.gameWinner == 0 {
+                    app.winnerStatusLabel.text = "Draw!"
+                }
+                else if app.board.gameWinner == 1 {
+                    app.winnerStatusLabel.text = "Green Wins!"
+                }
+                else if app.board.gameWinner == 2 {
+                    app.winnerStatusLabel.text = "Red Wins!"
+                }
             }
         }
     }
@@ -364,6 +372,7 @@ class ReversiApp : OCApp {
     func ResetButtonPressed(button: OCControlClickable) {
         board.reset()
         redrawTiles()
+        winnerStatusLabel.text = ""
     }
 
 
