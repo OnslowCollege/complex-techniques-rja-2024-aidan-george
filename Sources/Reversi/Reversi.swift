@@ -309,6 +309,12 @@ class ReversiApp : OCApp {
     // Dialog for displaying rules.
     let RulesDialog: OCDialog = OCDialog(title: "Rules", message: "")
 
+    let Rules1: OCImageView = OCImageView(filename: "images/rules1.png")
+
+    let Rules2: OCImageView = OCImageView(filename: "images/rules2.png")
+
+    let Rules3: OCImageView = OCImageView(filename: "images/rules3.png")
+
     struct Tile{
         let x: Int
         let y: Int
@@ -414,6 +420,9 @@ class ReversiApp : OCApp {
 
     /// Event function for when the "RulesButton" button is pressed.
     func RulesButtonPressed(button: OCControlClickable) {
+        Rules1.visible = true
+        Rules2.visible = true
+        Rules3.visible = true
     }
 
 
@@ -426,11 +435,15 @@ class ReversiApp : OCApp {
         self.ResetButton.onClick(self.ResetButtonPressed)
         
         // Event for when the "RulesButton" button is pressed.
-        //self.RulesButton.onClick(self.RulesButtonPressed)
+        self.RulesButton.onClick(self.RulesButtonPressed)
 
-        self.RulesButton.onClick({ button in
-            self.RulesDialog.show(in: app)
-        })
+        // self.RulesButton.onClick({ button in
+        //     self.RulesDialog.show(in: app)
+        // })
+
+        Rules1.visible = false
+        Rules2.visible = false
+        Rules3.visible = false
 
         self.RulesDialog.onConfirm({ button in
             self.rulesText.text = "Ok"
@@ -457,8 +470,9 @@ class ReversiApp : OCApp {
             }
             buttonRows.append(OCHBox(controls: controlsRow))
         }
+        let Rules = OCVBox(controls: [Rules1, Rules2, Rules3])
         let Grid = OCVBox(controls: buttonRows)
-        let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, RulesButton, ModeDropDown])
+        let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Rules, Grid, ResetButton, RulesButton, ModeDropDown])
         return Program
     }
 }
