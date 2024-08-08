@@ -295,6 +295,8 @@ class ReversiApp : OCApp {
     var winnerStatusLabel: OCLabel = OCLabel(text: "")
 
     let modeDropDown: OCDropDown = OCDropDown(fromArray: ["Versus", "Easy", "Hard"])
+
+    let rulesButton: OCButton = OCButton(text: "Rules")
     struct Tile{
         let x: Int
         let y: Int
@@ -419,7 +421,7 @@ class ReversiApp : OCApp {
             buttonRows.append(OCHBox(controls: controlsRow))
         }
         let Grid = OCVBox(controls: buttonRows)
-        let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, modeDropDown])
+        let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, rulesButton, modeDropDown])
         return Program
     }
 }
