@@ -429,7 +429,7 @@ class ReversiApp : OCApp {
         //self.RulesButton.onClick(self.RulesButtonPressed)
 
         self.RulesButton.onClick({ button in
-            self.RulesDialog.show()
+            self.RulesDialog.show(in: app)
         })
 
         self.RulesDialog.onConfirm({ button in
