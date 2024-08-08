@@ -360,6 +360,26 @@ class ReversiApp : OCApp {
                 }
             }
         }
+
+        var whitePieceCount = 0
+        var blackPieceCount = 0
+        for x in 0..<self.board.colum{
+            for y in 0..<self.board.rows{
+                let pieceType = self.board.getPieceAt(x: x, y: y)
+                if (pieceType == 1){
+                    // white piece
+                    whitePieceCount += 1
+                }
+                if (pieceType == 2){
+                    // black piece
+                    blackPieceCount += 1
+                }
+            }
+        }
+
+        print("White: \(whitePieceCount)  Black: \(blackPieceCount)")
+
+        self.pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
     }
     
 
@@ -379,22 +399,7 @@ class ReversiApp : OCApp {
 
 
     override open func main(app: OCAppDelegate) -> OCControl {
-        var whitePieceCount = 0
-        var blackPieceCount = 0
-        for x in 0..<board.colum{
-            for y in 0..<board.rows{
-                let pieceType = board.getPieceAt(x: x, y: y)
-                if (pieceType == 1){
-                    // white piece
-                    whitePieceCount += 1
-                }
-                if (pieceType == 2){
-                    // black piece
-                    blackPieceCount += 1
-                }
-            }
-        }
-        pieceCountLabel.text = "White: \(whitePieceCount)  Black: \(blackPieceCount)"
+        
 
         // Event for when the "ResetButton" button is pressed.
         self.ResetButton.onClick(self.ResetButtonPressed)
