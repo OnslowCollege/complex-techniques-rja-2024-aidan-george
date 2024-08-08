@@ -288,14 +288,19 @@ func easyAI(board: Board) -> [Int]{
 
 class ReversiApp : OCApp {
 
+    // Button for resetting the board.
     let ResetButton: OCButton = OCButton(text: "Reset Board")
 
+    // Label for displaying the piece counts.
     var pieceCountLabel: OCLabel = OCLabel(text: "")
 
+    // Label for displaying the winner.
     var winnerStatusLabel: OCLabel = OCLabel(text: "")
 
+    // Dropdown for changing modes.
     let ModeDropDown: OCDropDown = OCDropDown(fromArray: ["Versus", "Easy", "Hard"])
 
+    // Button for opening the rules.
     let RulesButton: OCButton = OCButton(text: "Rules")
     struct Tile{
         let x: Int
@@ -363,6 +368,7 @@ class ReversiApp : OCApp {
             }
         }
 
+        // Counter for tiles.
         var whitePieceCount = 0
         var blackPieceCount = 0
         for x in 0..<self.board.colum{
@@ -400,10 +406,7 @@ class ReversiApp : OCApp {
     }
 
     /// Event function for when the "RulesButton" button is pressed.
-    func ResetButtonPressed(button: OCControlClickable) {
-        board.reset()
-        redrawTiles()
-        winnerStatusLabel.text = ""
+    func RulesButtonPressed(button: OCControlClickable) {
     }
 
 
@@ -412,6 +415,9 @@ class ReversiApp : OCApp {
 
         // Event for when the "ResetButton" button is pressed.
         self.ResetButton.onClick(self.ResetButtonPressed)
+        
+        // Event for when the "RulesButton" button is pressed.
+        self.RulesButton.onClick(self.RulesButtonPressed)
 
         for row in self.tiles{
             for tile in row{
@@ -428,7 +434,7 @@ class ReversiApp : OCApp {
             buttonRows.append(OCHBox(controls: controlsRow))
         }
         let Grid = OCVBox(controls: buttonRows)
-        let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, RulesButton, modeDropDown])
+        let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, RulesButton, ModeDropDown])
         return Program
     }
 }
