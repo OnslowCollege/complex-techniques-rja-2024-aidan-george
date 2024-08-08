@@ -303,6 +303,9 @@ class ReversiApp : OCApp {
     // Button for opening the rules.
     let RulesButton: OCButton = OCButton(text: "Rules")
 
+    // Text
+    var rulesText: OCLabel = OCLabel(text: "")
+
     // Dialog for displaying rules.
     let RulesDialog: OCDialog = OCDialog(title: "Rules", message: "")
 
@@ -428,10 +431,12 @@ class ReversiApp : OCApp {
         })
 
         self.RulesDialog.onConfirm({ button in
+            self.rulesText.text = "Ok"
             self.RulesDialog.hide()
         })
 
         self.RulesDialog.onCancel({ button in
+            self.rulesText.text = "Cancel"
             self.RulesDialog.hide()
         })
 
