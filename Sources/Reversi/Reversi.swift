@@ -418,13 +418,15 @@ class ReversiApp : OCApp {
 
 
     override open func main(app: OCAppDelegate) -> OCControl {
+
+        //self.RulesDialog.addField(key: "image", field: OCImageView(filename: "images/fun.png"))
         
 
         // Event for when the "ResetButton" button is pressed.
         self.ResetButton.onClick(self.ResetButtonPressed)
         
         // Event for when the "RulesButton" button is pressed.
-        self.RulesButton.onClick(self.RulesButtonPressed)
+        //self.RulesButton.onClick(self.RulesButtonPressed)
 
         self.RulesButton.onClick({ button in
             self.RulesDialog.show()
