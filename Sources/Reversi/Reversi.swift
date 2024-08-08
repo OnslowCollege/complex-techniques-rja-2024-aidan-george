@@ -302,6 +302,10 @@ class ReversiApp : OCApp {
 
     // Button for opening the rules.
     let RulesButton: OCButton = OCButton(text: "Rules")
+
+    // Dialog for displaying rules.
+    let RulesDialog: OCDialog = OCDialog(title: "Rules", message: "")
+
     struct Tile{
         let x: Int
         let y: Int
@@ -418,6 +422,19 @@ class ReversiApp : OCApp {
         
         // Event for when the "RulesButton" button is pressed.
         self.RulesButton.onClick(self.RulesButtonPressed)
+
+        self.RulesButton.onClick({ button in
+            self.RulesDialog.show()
+        })
+
+        self.RulesDialog.onConfirm({ button in
+            self.RulesDialog.hide()
+        })
+
+        self.RulesDialog.onCancel({ button in
+            self.RulesDialog.hide()
+        })
+
 
         for row in self.tiles{
             for tile in row{
