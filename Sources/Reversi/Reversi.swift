@@ -301,7 +301,7 @@ class ReversiApp : OCApp {
     let ModeDropDown: OCDropDown = OCDropDown(fromArray: ["Versus", "Easy", "Hard"])
 
     // Button for opening the rules.
-    let RulesButton: OCButton = OCButton(text: "   Rules   ")
+    let RulesButton: OCButton = OCButton(text: "Rules")
 
     // Text
     var rulesText: OCLabel = OCLabel(text: "")
@@ -456,6 +456,8 @@ class ReversiApp : OCApp {
         Rules1.visible = false
         Rules2.visible = false
         Rules3.visible = false
+
+        RulesButton.setStyle(OCStyle.borderWidth(500))
 
         self.RulesDialog.onConfirm({ button in
             self.rulesText.text = "Ok"
