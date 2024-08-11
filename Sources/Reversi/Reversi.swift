@@ -487,6 +487,7 @@ class ReversiApp : OCApp {
         let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, RulesButton, ModeDropDown])
         let ProgramFull = OCHBox(controls: [Program, Rules])
         Grid.setStyle(OCStyle.backgroundColor(OCColor.antiqueWhite))
+        ProgramFull.setStyle(OCStyle.borderWidth(500))
         return ProgramFull
     }
 }
