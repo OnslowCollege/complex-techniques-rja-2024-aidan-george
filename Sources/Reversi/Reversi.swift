@@ -301,7 +301,7 @@ class ReversiApp : OCApp {
     let ModeDropDown: OCDropDown = OCDropDown(fromArray: ["Versus", "Easy", "Hard"])
 
     // Button for opening the rules.
-    let RulesButton: OCButton = OCButton(text: "Rules")
+    let RulesButton: OCButton = OCButton(text: "   Rules   ")
 
     // Text
     var rulesText: OCLabel = OCLabel(text: "")
@@ -315,7 +315,7 @@ class ReversiApp : OCApp {
 
     let Rules3: OCImageView = OCImageView(filename: "images/rules3.png")
 
-    var Rules = OCVBox(controls: [])
+    var rulesShown: Bool = false
 
     struct Tile{
         let x: Int
@@ -422,11 +422,17 @@ class ReversiApp : OCApp {
 
     /// Event function for when the "RulesButton" button is pressed.
     func RulesButtonPressed(button: OCControlClickable) {
-        if Rules.visible == false {
-            Rules.visible = true
+        if rulesShown == false {
+            Rules1.visible = true
+            Rules2.visible = true
+            Rules3.visible = true
+            rulesShown = true
         }
-        else if Rules.visible == true {
-            Rules.visible = false
+        else if rulesShown == true {
+            Rules1.visible = false
+            Rules2.visible = false
+            Rules3.visible = false
+            rulesShown = false
         }
         
     }
@@ -446,7 +452,10 @@ class ReversiApp : OCApp {
         // self.RulesButton.onClick({ button in
         //     self.RulesDialog.show(in: app)
         // })
-        Rules.visible = false
+
+        Rules1.visible = false
+        Rules2.visible = false
+        Rules3.visible = false
 
         self.RulesDialog.onConfirm({ button in
             self.rulesText.text = "Ok"
@@ -473,7 +482,7 @@ class ReversiApp : OCApp {
             }
             buttonRows.append(OCHBox(controls: controlsRow))
         }
-        self.Rules = OCVBox(controls: [Rules1, Rules2, Rules3])
+        let Rules = OCVBox(controls: [Rules1, Rules2, Rules3])
         let Grid = OCVBox(controls: buttonRows)
         let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, RulesButton, ModeDropDown])
         let ProgramFull = OCHBox(controls: [Program, Rules])
