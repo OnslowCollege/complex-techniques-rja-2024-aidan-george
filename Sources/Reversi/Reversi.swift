@@ -420,12 +420,12 @@ class ReversiApp : OCApp {
 
     /// Event function for when the "RulesButton" button is pressed.
     func RulesButtonPressed(button: OCControlClickable) {
-        if Rules1.visible == false {
-            Rules1.visible = true
-            Rules2.visible = true
-            Rules3.visible = true
+        if self.Rules1.visible == false {
+            self.Rules1.visible = true
+            self.Rules2.visible = true
+            self.Rules3.visible = true
         }
-        else if Rules1.visible == true {
+        else if self.Rules1.visible == true {
             Rules1.visible = false
             Rules2.visible = false
             Rules3.visible = false
