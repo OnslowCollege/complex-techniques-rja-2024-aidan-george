@@ -460,7 +460,6 @@ class ReversiApp : OCApp {
         Rules1.visible = false
         Rules2.visible = false
         Rules3.visible = false
-        self.rules.visible = false
 
         self.RulesDialog.onConfirm({ button in
             self.rulesText.text = "Ok"
@@ -492,6 +491,7 @@ class ReversiApp : OCApp {
         let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, RulesButton, ModeDropDown])
         let ProgramFull = OCVBox(controls: [Program, rules])
         Grid.setStyle(OCStyle.backgroundColor(OCColor.antiqueWhite))
+        rules.visible = false
         return ProgramFull
     }
 }
