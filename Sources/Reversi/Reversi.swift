@@ -317,6 +317,8 @@ class ReversiApp : OCApp {
 
     var rulesShown: Bool = false
 
+    var rules: OCVBox = OCVBox(controls: [])
+
     struct Tile{
         let x: Int
         let y: Int
@@ -426,12 +428,14 @@ class ReversiApp : OCApp {
             Rules1.visible = true
             Rules2.visible = true
             Rules3.visible = true
+            rules.visible = true
             rulesShown = true
         }
         else if rulesShown == true {
             Rules1.visible = false
             Rules2.visible = false
             Rules3.visible = false
+            rules.visible = false
             rulesShown = false
         }
         
@@ -456,6 +460,7 @@ class ReversiApp : OCApp {
         Rules1.visible = false
         Rules2.visible = false
         Rules3.visible = false
+        self.rules.visible = false
 
         self.RulesDialog.onConfirm({ button in
             self.rulesText.text = "Ok"
@@ -482,10 +487,10 @@ class ReversiApp : OCApp {
             }
             buttonRows.append(OCHBox(controls: controlsRow))
         }
-        let Rules = OCVBox(controls: [Rules1, Rules2, Rules3])
+        rules = OCVBox(controls: [Rules1, Rules2, Rules3])
         let Grid = OCVBox(controls: buttonRows)
         let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ResetButton, RulesButton, ModeDropDown])
-        let ProgramFull = OCVBox(controls: [Program, Rules])
+        let ProgramFull = OCVBox(controls: [Program, rules])
         Grid.setStyle(OCStyle.backgroundColor(OCColor.antiqueWhite))
         return ProgramFull
     }
