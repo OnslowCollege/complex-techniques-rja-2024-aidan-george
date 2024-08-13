@@ -356,7 +356,7 @@ select {
     min-height: 3em;
     max-height: 3em;
     padding: 0 0em;
-    min-width: 3em;
+    min-width: 3em; /* Originally 3em */
     border: 0;
     border-radius: 1000px;
     position: relative !important;
