@@ -309,11 +309,11 @@ class ReversiApp : OCApp {
     // Dialog for displaying rules.
     let RulesDialog: OCDialog = OCDialog(title: "Rules", message: "")
 
-    let Rules1: OCImageView = OCImageView(filename: "images/rules1.png")
+    let Rules1: OCImageView = OCImageView(filename: "images/Reversi_0007.png")
 
-    let Rules2: OCImageView = OCImageView(filename: "images/rules2.png")
+    let Rules2: OCImageView = OCImageView(filename: "images/Reversi_0008.png")
 
-    let Rules3: OCImageView = OCImageView(filename: "images/rules3.png")
+    let Rules3: OCImageView = OCImageView(filename: "images/Reversi_0009.png")
 
     var rulesShown: Bool = false
 
