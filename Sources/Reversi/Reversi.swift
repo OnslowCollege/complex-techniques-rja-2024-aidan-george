@@ -380,7 +380,7 @@ class ReversiApp : OCApp {
                 }
                 else if (pieceType == 2){
                     // red/player 2
-                    tile.image.filename = "images/RedDot.png"
+                    tile.image.filename = "images/RedLogo.png"
                 }
             }
         }
