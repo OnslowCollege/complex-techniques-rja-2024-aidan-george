@@ -181,7 +181,7 @@
             pickupAmount += 5
             console.log(pickupAmount)
         }
-        if (cardToPlay.name === '7') {
+        if (cardToPlay.name === '10') {
             state = 'playing'
             state = 'opponentTurn'
             return
@@ -281,7 +281,7 @@
             playerCards = playerCards.filter(card => card !== clicked);
             playerCardCount = playerCards.length;
 
-            if (clicked.name === '7') {
+            if (clicked.name === '10') {
                 state = 'playerTurn'
                 turnCount++;
                 console.log(turnCount)
@@ -426,8 +426,6 @@
         It also applies if a player plays a 5. The next player picks up 5 cards, or adds another 5 to accumulate.
 
         If a player plays a 10, the next players turn is skipped.
-
-        If a player plays a 7, the player who played that 7 gets to play again.
 
         If the deck empties and the game is therefore impossible to win, the game will be declared a draw.
     </p>
