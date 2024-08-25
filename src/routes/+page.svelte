@@ -427,8 +427,6 @@
 
         If a player plays a 10, the next players turn is skipped.
 
-        If a player plays a 7, the player who played that 7 gets to play again.
-
         If the deck empties and the game is therefore impossible to win, the game will be declared a draw.
     </p>
         <button on:click={toggleHelpScreen} class="return-button">
