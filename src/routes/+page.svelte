@@ -181,7 +181,7 @@
             pickupAmount += 5
             console.log(pickupAmount)
         }
-        if (cardToPlay.name === '7') {
+        if (cardToPlay.name === '10') {
             state = 'playing'
             state = 'opponentTurn'
             return
@@ -281,7 +281,7 @@
             playerCards = playerCards.filter(card => card !== clicked);
             playerCardCount = playerCards.length;
 
-            if (clicked.name === '7') {
+            if (clicked.name === '10') {
                 state = 'playerTurn'
                 turnCount++;
                 console.log(turnCount)
