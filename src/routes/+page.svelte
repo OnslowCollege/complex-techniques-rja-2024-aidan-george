@@ -626,7 +626,7 @@
             <button 
             on:click={() => (currentCard.suit = suit)}
             on:click={() => (state = "opponentTurn")}
-                class="card">
+            class="card">
                 <h1>{suit}</h1>
             </button>
         {/each}
@@ -738,6 +738,20 @@
 
     .help-screen p {
         font-size: 1.5rem;
+    }
+
+    .suit-select-button {
+        position: fixed;   
+        padding: 1.5rem 2rem;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 4px;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        display: inline-block;
     }
 
     .return-button, .retry-button {
