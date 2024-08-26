@@ -1,3 +1,6 @@
 {
-    "gitdoc.enabled": false
+    "gitdoc.enabled": false,
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
+    ]
 }
