@@ -32,6 +32,7 @@
     let lastCardActive = false;
     let helpActive = false;
     let pileCount = dealPile.length;
+    let pickupAlert = false
     const suits: string[] = ['clubs', 'diamonds', 'hearts', 'spades'];
 
     /* Allow the user to pause the game */
@@ -227,25 +228,11 @@
             );
         }
 
-        // If no playable cards, the player must draw a card (if applicable)
+        // If no playable cards, the give a message that the player must draw a card
         if (playableCards.length === 0) {
-            if (pickupAmount === 0 ){
-                console.log('Player has no playable cards, must draw a card');
-                pickup(playerCards)
-                // For simplicity, we'll skip drawing a card in this example
-                state = 'opponentTurn'; // End the player's turn if they have no playable cards
-                return;
-            } else {
-                console.log('Player has no playable cards, must draw a card');
-                for (let i = 0; i < pickupAmount; i++) {
-                    pickup(playerCards)
-                }
-                currentCard.name = ""
-                pickupAmount = 0
-                // For simplicity, we'll skip drawing a card in this example
-                state = 'opponentTurn'; // End the player's turn if they have no playable cards
-                return;
-            }
+            pickupAlert = true
+        } else {
+            pickupAlert = false
         }
     }
 
@@ -307,6 +294,26 @@
             }
             state = "opponentTurn";
             lastCardCheck();
+        }
+    }
+
+    function playerPickup() {
+        if (pickupAmount === 0 ){
+            console.log('Player has no playable cards, must draw a card');
+            pickup(playerCards)
+            // For simplicity, we'll skip drawing a card in this example
+            state = 'opponentTurn'; // End the player's turn if they have no playable cards
+            return;
+        } else {
+            console.log('Player has no playable cards, must draw a card');
+            for (let i = 0; i < pickupAmount; i++) {
+                pickup(playerCards)
+            }
+            currentCard.name = ""
+            pickupAmount = 0
+            // For simplicity, we'll skip drawing a card in this example
+            state = 'opponentTurn'; // End the player's turn if they have no playable cards
+            return;
         }
     }
 
@@ -474,11 +481,16 @@
     </div>
     <div class="center">
         <div class="pickup-area">
+        {#if pickupAlert}
+        <div class="pickup-alert">
+            <p>Player must pickup</p>
+        </div>
+        {/if}
         <div class="pile-count">
             <div class="pile-counter">{pileCount}</div>
         </div>
         <button on:click = {() => {
-            pickup(playerCards);
+            playerPickup();
             state = "opponentTurn";
         }} class="card pickup-pile">
             <img src="/cards/backcard.png" alt="Pickup Card Pile" />
@@ -504,7 +516,7 @@
         {/each}
     </div>
     <div class="card-count">
-    <div class="card-counter player-card-counter">{playerCardCount}</div>
+        <div class="card-counter player-card-counter">{playerCardCount}</div>
     </div>
     <button 
     on:click={handleLastCardClick}
@@ -537,6 +549,11 @@
     </div>
     <div class="center">
         <div class="pickup-area">
+        {#if pickupAlert}
+        <div class="pickup-alert">
+            <p>Player must pickup</p>
+        </div>
+        {/if}
         <div class="pile-count">
             <div class="pile-counter">{pileCount}</div>
         </div>
@@ -560,7 +577,7 @@
         {/each}
     </div>
     <div class="card-count">
-    <div class="card-counter player-card-counter">{playerCardCount}</div>
+        <div class="card-counter player-card-counter">{playerCardCount}</div>
     </div>
     <button 
     on:click={handleLastCardClick}
@@ -587,6 +604,11 @@
     </div>
     <div class="center">
         <div class="pickup-area">
+        {#if pickupAlert}
+        <div class="pickup-alert">
+            <p>Player must pickup</p>
+        </div>
+        {/if}
         <div class="pile-count">
             <div class="pile-counter">{pileCount}</div>
         </div>
@@ -606,7 +628,8 @@
         {/each}
     </div>
     <div class="card-count">
-    <div class="card-counter player-card-counter">{playerCardCount}</div>
+        <div class="card-counter player-card-counter"> {playerCardCount} </div>
+        
     </div>
 {/if}
 
@@ -825,9 +848,23 @@
 
     .card-count {
         display: flex;
+        gap: 10px; /* Optional: Adds space between items */
         flex-direction: column;
         align-items: left;
         margin: 0;
+    }
+
+    .pickup-alert {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        background-color: rgb(248, 12, 12);
+        color: rgb(252, 251, 251);
+        border: 2px black;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 100px;
+        margin-bottom: 1rem;
     }
 
     .pickup-area {
