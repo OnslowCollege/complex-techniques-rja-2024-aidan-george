@@ -345,6 +345,21 @@
     /* Reset game to starting condition */
     function resetGame() {
         state = "start";
+        playerCardCount = 0;
+        turnCount = 1;
+        oppositionCardCount = 0;
+        playerHandCards = [];
+        playerCards = [];
+        oppositionCards = [];
+        handLength = 7;
+        clicked = null;
+        currentCard = null;
+        dealPile = cards;
+        pickupAmount = 0;
+        playableCards = [];
+        lastCardActive = false;
+        helpActive = false;
+        pileCount = dealPile.length;
     }
 
     /* When game is won give option to reset */
@@ -595,7 +610,7 @@
     <div class ="win-screen">
         <h1>You Won!</h1>
         <h2>Press the retry button to play again</h2>
-        <button on:click={resetGame()} class="retry-button">
+        <button on:click={resetGame} class="retry-button">
             retry
             </button>
     </div>
@@ -605,7 +620,7 @@
     <div class ="loss-screen">
         <h1>You Lost!</h1>
         <h2>Press the retry button to play again</h2>
-        <button on:click={resetGame()} class="retry-button">
+        <button on:click={resetGame} class="retry-button">
             retry
             </button>
     </div>
@@ -615,7 +630,7 @@
     <div class ="draw-screen">
         <h1>You Drew!</h1>
         <h2>Press the retry button to play again</h2>
-        <button on:click={resetGame()} class="retry-button">
+        <button on:click={resetGame} class="retry-button">
             retry
             </button>
     </div>
