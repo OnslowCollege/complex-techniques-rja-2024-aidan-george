@@ -13,7 +13,8 @@
         | "won"
         | "help"
         | "lost"
-        | "draw";
+        | "draw"
+        | "suitSelect"
 
     let state: State = 'start'
     let playerCardCount = 0;
@@ -31,7 +32,7 @@
     let lastCardActive = false;
     let helpActive = false;
     let pileCount = dealPile.length;
-
+    const suits: string[] = ['clubs', 'diamonds', 'hearts', 'spades'];
 
     /* Allow the user to pause the game */
     function pauseGame(e: KeyboardEvent) {
@@ -186,6 +187,11 @@
             state = 'opponentTurn'
             return
         }
+        if (cardToPlay.name === 'ace') {
+            const randomIndex = Math.floor(Math.random() * suits.length);
+            let chosenSuit = suits[randomIndex];
+            currentCard.suit = chosenSuit
+        }
 
         // Transition back to the player's turn
         state = 'playerTurn';
@@ -265,6 +271,13 @@
                 console.log(pickupAmount)
             }
 
+        } else if (clicked.name === 'ace') {
+            currentCard = clicked
+            state = "suitSelect"
+            lastCardCheck()
+            playerCards = playerCards.filter(card => card !== clicked);
+            playerCardCount = playerCards.length;
+            return
         } else if (
             currentCard.length === 0 ||
             currentCard?.suit === clicked?.suit ||
@@ -284,13 +297,19 @@
             if (clicked.name === '10') {
                 state = 'playerTurn'
                 turnCount++;
-                console.log(turnCount)
+                lastCardCheck()
+                return
+            }
+            if (clicked.name === 'ace') {
+                state = "suitSelect"
+                lastCardCheck()
                 return
             }
             state = "opponentTurn";
             lastCardCheck();
         }
     }
+
 
     function pickup(competitor: CardInfo[]) {
 
@@ -322,7 +341,7 @@
     function startCard() {
         const randomCard: CardInfo = getRandomCard(dealPile)
 
-        if (randomCard.name !== "2" && randomCard.name !== "5") {
+        if (randomCard.name !== "2" && randomCard.name !== "5" && randomCard.name !== "10" && randomCard.name !== "ace") {
             // Remove the card from the array
             dealPile = dealPile.filter(card => card !== randomCard);
             currentCard = randomCard
@@ -582,6 +601,39 @@
     <div class="cards">     
         {#each playerCards as playerHandCard}
             <button on:click={() => (clicked = playerHandCard)} class="card">
+                <img src={playerHandCard.image} alt={playerHandCard.name} loading="lazy"/>
+            </button>
+        {/each}
+    </div>
+    <div class="card-count">
+    <div class="card-counter player-card-counter">{playerCardCount}</div>
+    </div>
+{/if}
+
+{#if state === "suitSelect"}
+    <div class="cards">
+        {#each oppositionCards as oppositionHandCard}
+            <button class="card">
+                <img src="/cards/backcard.png" alt="Back of card" />
+            </button>
+        {/each}
+    </div>
+    <div class="card-count">
+        <div class="card-counter">{oppositionCardCount}</div>
+    </div>
+    <div class="cards">     
+        {#each suits as suit}
+            <button 
+            on:click={() => (currentCard.suit = suit)}
+            on:click={() => (state = "opponentTurn")}
+                class="card">
+                <h1>{suit}</h1>
+            </button>
+        {/each}
+    </div>
+    <div class="cards">     
+        {#each playerCards as playerHandCard}
+            <button class="card">
                 <img src={playerHandCard.image} alt={playerHandCard.name} loading="lazy"/>
             </button>
         {/each}
