@@ -124,7 +124,7 @@
             );
         } else {
             playableCards = oppositionCards.filter(card => 
-                card.suit === currentCard?.suit || card.name === currentCard?.name
+                card.suit === currentCard?.suit || card.name === currentCard?.name || card.name === "ace"
             );
         }
 
@@ -188,7 +188,11 @@
         if (cardToPlay.name === 'ace') {
             const randomIndex = Math.floor(Math.random() * suits.length);
             let chosenSuit = suits[randomIndex];
-            currentCard.suit = chosenSuit
+            const aces: CardInfo[] = cards.filter(obj => obj.name === "ace")
+            const result = aces.find(obj => obj.suit === chosenSuit)
+            if (result) {
+                currentCard = result
+            }
         }
 
         // Transition back to the player's turn
@@ -221,7 +225,7 @@
             );
         } else {
             playableCards = playerCards.filter(card => 
-                card.suit === currentCard?.suit || card.name === currentCard?.name
+                card.suit === currentCard?.suit || card.name === currentCard?.name || card.name === "ace"
             );
         }
 
