@@ -2,6 +2,7 @@
 //
 //  main.swift
 //  OCProgram
+//  Using version 0.0.8 of OCGui
 //
 //  Created by Kellan Van Koughnet on 1/01/24.
 //
@@ -318,6 +319,8 @@ class ReversiApp : OCApp {
     var rulesShown: Bool = false
 
     var rules: OCVBox = OCVBox(controls: [])
+
+    var colourBlind: Bool = false
 
     struct Tile{
         let x: Int
