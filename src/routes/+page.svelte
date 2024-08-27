@@ -96,7 +96,7 @@
 
 
     function handleLastCardClick() {
-        if (playerCards.length = 2) {
+        if (playerCards.length === 2) {
             lastCardActive = true
         }
     }
@@ -165,12 +165,6 @@
         oppositionCardCount = oppositionCards.length;
 
         console.log('Opponent played:', cardToPlay);
-
-        // Check for win/loss conditions (e.g., if the player has no cards left)
-        if (playerCards.length === 0) {
-            gameWon(); // End the game if the player has no cards left
-            return;
-        }
 
         if (cardToPlay.name === '2') {
             pickupAmount += 2
@@ -250,6 +244,12 @@
 
         pileCount = dealPile.length
 
+        // Check for win/loss conditions (e.g., if the player has no cards left)
+        if (playerCards.length === 0) {
+            gameWon(); // End the game if the player has no cards left
+            return;
+        }
+
         if (dealPile.length === 0) {
             gameDraw()
             return;
@@ -319,6 +319,7 @@
                 pickup(playerCards)
             }
             currentCard.name = ""
+            lastCardCheck()
             pickupAmount = 0
             // For simplicity, we'll skip drawing a card in this example
             state = 'opponentTurn'; // End the player's turn if they have no playable cards
