@@ -17,7 +17,6 @@
         | "suitSelect"
 
     let state: State = 'start'
-    let currentState: State = 'start'
     let playerCardCount = 0;
     let turnCount: number = 0;
     let oppositionCardCount = 0;
@@ -39,11 +38,10 @@
     /* Allow the user to pause the game */
     function pauseGame(e: KeyboardEvent) {
         if (e.key === "Escape") {
-            if (state !== "paused") {
-                currentState = state
+            if (state === "playerTurn") {
                 state = "paused"
-            } else {
-                state = currentState
+            } else if (state === "paused") {
+                state = "playerTurn"
             }
         }
     }
