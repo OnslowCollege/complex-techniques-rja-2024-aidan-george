@@ -2,6 +2,7 @@
 <script lang="ts">
     import Layout from "./+layout.svelte";
     import { cards } from "./cards";
+    import { aces } from "./cards";
     import type { CardInfo } from "./cards";
 
     type State =
@@ -669,12 +670,12 @@
         <div class="card-counter">{oppositionCardCount}</div>
     </div>
     <div class="suit-select-box">     
-        {#each suits as suit}
+        {#each aces as ace}
             <button 
-            on:click={() => (suitSelect(suit))}
+            on:click={() => (suitSelect(ace.suit))}
             on:click={() => (state = "opponentTurn")}
-            class="suit-select-button">
-                {suit}
+            class="suit-select">
+                <img src={ace.image} alt={ace.name} loading="lazy"/>
             </button>
         {/each}
     </div>
