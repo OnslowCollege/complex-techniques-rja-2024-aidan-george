@@ -17,6 +17,7 @@
         | "suitSelect"
 
     let state: State = 'start'
+    let currentState: State = 'start'
     let playerCardCount = 0;
     let turnCount: number = 0;
     let oppositionCardCount = 0;
@@ -38,13 +39,11 @@
     /* Allow the user to pause the game */
     function pauseGame(e: KeyboardEvent) {
         if (e.key === "Escape") {
-            switch (state) {
-                case "playing":
-                    state = "paused";
-                    break;
-                case "paused":
-                    state = "playing";
-                    break;
+            if (state !== "paused") {
+                currentState = state
+                state = "paused"
+            } else {
+                state = currentState
             }
         }
     }
@@ -233,6 +232,14 @@
             pickupAlert = true
         } else {
             pickupAlert = false
+        }
+    }
+
+    function suitSelect(selectedSuit) {
+        const aces: CardInfo[] = cards.filter(obj => obj.name === "ace")
+        const result = aces.find(obj => obj.suit === selectedSuit)
+        if (result) {
+            currentCard = result
         }
     }
 
@@ -659,13 +666,13 @@
     <div class="card-count">
         <div class="card-counter">{oppositionCardCount}</div>
     </div>
-    <div class="cards">     
+    <div class="suit-select-box">     
         {#each suits as suit}
             <button 
-            on:click={() => (currentCard.suit = suit)}
+            on:click={() => (suitSelect(suit))}
             on:click={() => (state = "opponentTurn")}
-            class="card">
-                <h1>{suit}</h1>
+            class="suit-select-button">
+                {suit}
             </button>
         {/each}
     </div>
@@ -712,8 +719,15 @@
 {/if}
 
 <style>
+    .suit-select-box {
+    display: flex;
+    justify-content: center; /* Horizontally centers the items */
+    align-items: center; /* Vertically centers the items, if container has a height */
+    flex-wrap: wrap; /* Allows wrapping of items if they exceed container width */
+    gap: 2rem;
+    }
 
-.center {
+    .center {
         margin: auto;
         background-color: hsl(122, 92%, 20%);
     }
@@ -737,7 +751,7 @@
         align-items: center;
         gap: 1rem;
     }
-    .start-button, .help-button {
+    .start-button, .help-button, .suit-select-button {
         position: relative;
         padding: 2rem 2.5rem;
         font-size: 1.5rem;
@@ -778,19 +792,6 @@
         font-size: 1.5rem;
     }
 
-    .suit-select-button {
-        position: fixed;   
-        padding: 1.5rem 2rem;
-        font-size: 1.2rem;
-        border: none;
-        border-radius: 4px;
-        background-color: white;
-        color: black;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        text-align: center;
-        display: inline-block;
-    }
 
     .return-button, .retry-button {
         position: fixed;
