@@ -322,6 +322,8 @@ class ReversiApp : OCApp {
 
     var colourBlind: Bool = false
 
+    var colourSwitch: OCImageView = OCImageView(filename: "images/ColourBlindRGB.png")
+
     struct Tile{
         let x: Int
         let y: Int
@@ -442,6 +444,18 @@ class ReversiApp : OCApp {
             rulesShown = false
         }
         
+    }
+
+    /// Event function for when the "ColourSwitch" button is pressed.
+    func ColourSwitchPressed(button: OCControlClickable) {
+        if colourBlind == false {
+            colourSwitch.filename = "images/ColourBlindBW.png"
+            colourBlind = true
+        }
+        else if colourBlind == true {
+            colourSwitch.filename = "images/ColourBlindRGB.png"
+            colourBlind = false
+        }
     }
 
 
