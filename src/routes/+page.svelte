@@ -2,6 +2,7 @@
 <script lang="ts">
     import Layout from "./+layout.svelte";
     import { cards } from "./cards";
+    import { aces } from "./cards";
     import type { CardInfo } from "./cards";
 
     type State =
@@ -127,8 +128,6 @@
                 card.suit === currentCard?.suit || card.name === currentCard?.name || card.name === "ace"
             );
         }
-
-        console.log(pickupAmount)
 
         // If no playable cards, the opponent must draw a card (if applicable)
         if (playableCards.length === 0) {
@@ -369,6 +368,8 @@
     }
 
     function lastCardCheck() {
+        console.log(lastCardActive)
+        console.log(playerCardCount)
         if (playerCardCount === 1 && !lastCardActive) {
             pickupAmount += 2
         }
@@ -380,22 +381,7 @@
 
     /* Reset game to starting condition */
     function resetGame() {
-        state = "start";
-        playerCardCount = 0;
-        turnCount = 1;
-        oppositionCardCount = 0;
-        playerHandCards = [];
-        playerCards = [];
-        oppositionCards = [];
-        handLength = 7;
-        clicked = null;
-        currentCard = null;
-        dealPile = cards;
-        pickupAmount = 0;
-        playableCards = [];
-        lastCardActive = false;
-        helpActive = false;
-        pileCount = dealPile.length;
+        window.location.reload();
     }
 
     /* When game is won give option to reset */
@@ -424,6 +410,8 @@
             opponentTurn();
         }, 2000)
     }
+
+    $: {lastCardCheck()}
 
 
 
@@ -668,12 +656,12 @@
         <div class="card-counter">{oppositionCardCount}</div>
     </div>
     <div class="suit-select-box">     
-        {#each suits as suit}
+        {#each aces as ace}
             <button 
-            on:click={() => (suitSelect(suit))}
+            on:click={() => (suitSelect(ace.suit))}
             on:click={() => (state = "opponentTurn")}
-            class="suit-select-button">
-                {suit}
+            class="suit-select">
+                <img src={ace.image} alt={ace.name} loading="lazy"/>
             </button>
         {/each}
     </div>
