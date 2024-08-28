@@ -477,6 +477,7 @@ class ReversiApp : OCApp {
 
     /// Event function for when the "ColourSwitch" button is pressed.
     func ColourSwitchPressed(button: OCControlClickable) {
+        redrawTiles()
         var whitePieceCount = 0
         var blackPieceCount = 0
         for x in 0..<self.board.colum{
@@ -494,12 +495,12 @@ class ReversiApp : OCApp {
         }
         if colourBlind == false {
             colourSwitch.filename = "images/ColourBlindBW.png"
-            pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
+            pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
             colourBlind = true
         }
         else if colourBlind == true {
             colourSwitch.filename = "images/ColourBlindRGB.png"
-            pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
+            pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
             colourBlind = false
         }
     }
