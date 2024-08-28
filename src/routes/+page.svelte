@@ -380,22 +380,7 @@
 
     /* Reset game to starting condition */
     function resetGame() {
-        state = "start";
-        playerCardCount = 0;
-        turnCount = 1;
-        oppositionCardCount = 0;
-        playerHandCards = [];
-        playerCards = [];
-        oppositionCards = [];
-        handLength = 7;
-        clicked = null;
-        currentCard = null;
-        dealPile = cards;
-        pickupAmount = 0;
-        playableCards = [];
-        lastCardActive = false;
-        helpActive = false;
-        pileCount = dealPile.length;
+        window.location.reload();
     }
 
     /* When game is won give option to reset */
