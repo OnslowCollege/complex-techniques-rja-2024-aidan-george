@@ -129,8 +129,6 @@
             );
         }
 
-        console.log(pickupAmount)
-
         // If no playable cards, the opponent must draw a card (if applicable)
         if (playableCards.length === 0) {
             if (pickupAmount === 0 ){
@@ -369,6 +367,8 @@
     }
 
     function lastCardCheck() {
+        console.log(lastCardActive)
+        console.log(playerCardCount)
         if (playerCardCount === 1 && !lastCardActive) {
             pickupAmount += 2
         }
@@ -409,6 +409,8 @@
             opponentTurn();
         }, 2000)
     }
+
+    $: {lastCardCheck()}
 
 
 
