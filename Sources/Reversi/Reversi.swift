@@ -384,41 +384,6 @@ class ReversiApp : OCApp {
     }
 
     func redrawTiles(){
-        for x in 0..<8{
-            for y in 0..<8{
-                let pieceType = self.board.getPieceAt(x: x, y: y)
-                let tile = self.tiles[x][y]
-                if colourBlind == true {
-                    if (pieceType == 0){
-                    // empty
-                    tile.image.filename = "images/SquareOutline.png"
-                    }
-                    else if (pieceType == 1){
-                        // green/player1
-                        tile.image.filename = "images/GreenLogo.png"
-                    }
-                    else if (pieceType == 2){
-                        // red/player 2
-                        tile.image.filename = "images/RedLogo.png"
-                    }
-                }
-                else if colourBlind == false {
-                    if (pieceType == 0){
-                    // empty
-                    tile.image.filename = "images/SquareOutline.png"
-                    }
-                    else if (pieceType == 1){
-                        // green/player1
-                        tile.image.filename = "images/BlackLogo.png"
-                    }
-                    else if (pieceType == 2){
-                        // red/player 2
-                        tile.image.filename = "images/WhiteLogo.png"
-                    }
-                }
-            }
-        }
-
         // Counter for tiles.
         var whitePieceCount = 0
         var blackPieceCount = 0
@@ -436,9 +401,45 @@ class ReversiApp : OCApp {
             }
         }
 
-        print("White: \(whitePieceCount)  Black: \(blackPieceCount)")
+        for x in 0..<8{
+            for y in 0..<8{
+                let pieceType = self.board.getPieceAt(x: x, y: y)
+                let tile = self.tiles[x][y]
+                if colourBlind == true {
+                    self.pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
+                    if (pieceType == 0){
+                    // empty
+                    tile.image.filename = "images/SquareOutline.png"
+                    }
+                    else if (pieceType == 1){
+                        // green/player1
+                        tile.image.filename = "images/BlackLogo.png"
+                    }
+                    else if (pieceType == 2){
+                        // red/player 2
+                        tile.image.filename = "images/WhiteLogo.png"
+                    }
+                }
+                else if colourBlind == false {
+                    self.pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
+                    if (pieceType == 0){
+                    // empty
+                    tile.image.filename = "images/SquareOutline.png"
+                    }
+                    else if (pieceType == 1){
+                        // green/player1
+                        tile.image.filename = "images/GreenLogo.png"
+                    }
+                    else if (pieceType == 2){
+                        // red/player 2
+                        tile.image.filename = "images/RedLogo.png"
+                    }
+                }
+            }
+        }
 
-        self.pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
+
+        print("White: \(whitePieceCount)  Black: \(blackPieceCount)")
     }
     
 
