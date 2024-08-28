@@ -478,7 +478,6 @@ class ReversiApp : OCApp {
 
     /// Event function for when the "ColourSwitch" button is pressed.
     func ColourSwitchPressed(button: OCControlClickable) {
-        redrawTiles()
         var whitePieceCount = 0
         var blackPieceCount = 0
         for x in 0..<self.board.colum{
@@ -504,6 +503,7 @@ class ReversiApp : OCApp {
             pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
             colourBlind = false
         }
+        redrawTiles()
     }
 
 
