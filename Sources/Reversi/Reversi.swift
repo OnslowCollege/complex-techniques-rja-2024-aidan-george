@@ -470,6 +470,9 @@ class ReversiApp : OCApp {
         // Event for when the "RulesButton" button is pressed.
         self.RulesButton.onClick(self.RulesButtonPressed)
 
+        // Event for when the "colourSwitch" button is pressed.
+        self.colourSwitch.onClick(self.ColourSwitchPressed)
+
         // self.RulesButton.onClick({ button in
         //     self.RulesDialog.show(in: app)
         // })
@@ -505,7 +508,7 @@ class ReversiApp : OCApp {
         }
         rules = OCVBox(controls: [Rules1, Rules2, Rules3])
         let Grid = OCVBox(controls: buttonRows)
-        let ControlRow = OCHBox(controls: [RulesButton, ResetButton, ModeDropDown])
+        let ControlRow = OCHBox(controls: [RulesButton, ResetButton, ModeDropDown, colourSwitch])
         let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ControlRow])
         let ProgramFull = OCVBox(controls: [Program, rules])
         Grid.setStyle(OCStyle.backgroundColor(OCColor.antiqueWhite))
