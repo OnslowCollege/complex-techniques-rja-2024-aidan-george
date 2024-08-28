@@ -375,17 +375,33 @@ class ReversiApp : OCApp {
             for y in 0..<8{
                 let pieceType = self.board.getPieceAt(x: x, y: y)
                 let tile = self.tiles[x][y]
-                if (pieceType == 0){
+                if colourBlind == true {
+                    if (pieceType == 0){
                     // empty
                     tile.image.filename = "images/SquareOutline.png"
+                    }
+                    else if (pieceType == 1){
+                        // green/player1
+                        tile.image.filename = "images/BlackLogo.png"
+                    }
+                    else if (pieceType == 2){
+                        // red/player 2
+                        tile.image.filename = "images/WhiteLogo.png"
+                    }
                 }
-                else if (pieceType == 1){
-                    // green/player1
-                    tile.image.filename = "images/GreenLogo.png"
-                }
-                else if (pieceType == 2){
-                    // red/player 2
-                    tile.image.filename = "images/RedLogo.png"
+                else if colourBlind == false {
+                    if (pieceType == 0){
+                    // empty
+                    tile.image.filename = "images/SquareOutline.png"
+                    }
+                    else if (pieceType == 1){
+                        // green/player1
+                        tile.image.filename = "images/GreenLogo.png"
+                    }
+                    else if (pieceType == 2){
+                        // red/player 2
+                        tile.image.filename = "images/RedLogo.png"
+                    }
                 }
             }
         }
