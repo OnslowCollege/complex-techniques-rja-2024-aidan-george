@@ -339,14 +339,27 @@ class ReversiApp : OCApp {
             app.board.checkIsGameOver()
             let GameStatus: Bool = app.board.isGameOver()
             if GameStatus == true {
-                if app.board.gameWinner == 0 {
+                if app.colourBlind == true {
+                    if app.board.gameWinner == 0 {
                     app.winnerStatusLabel.text = "Draw!"
+                    }
+                    else if app.board.gameWinner == 1 {
+                        app.winnerStatusLabel.text = "Black Wins!"
+                    }
+                    else if app.board.gameWinner == 2 {
+                        app.winnerStatusLabel.text = "White Wins!"
+                    }
                 }
-                else if app.board.gameWinner == 1 {
-                    app.winnerStatusLabel.text = "Green Wins!"
-                }
-                else if app.board.gameWinner == 2 {
-                    app.winnerStatusLabel.text = "Red Wins!"
+                else if app.colourBlind == false {
+                    if app.board.gameWinner == 0 {
+                    app.winnerStatusLabel.text = "Draw!"
+                    }
+                    else if app.board.gameWinner == 1 {
+                        app.winnerStatusLabel.text = "Green Wins!"
+                    }
+                    else if app.board.gameWinner == 2 {
+                        app.winnerStatusLabel.text = "Red Wins!"
+                    }
                 }
             }
         }
@@ -464,12 +477,29 @@ class ReversiApp : OCApp {
 
     /// Event function for when the "ColourSwitch" button is pressed.
     func ColourSwitchPressed(button: OCControlClickable) {
+        var whitePieceCount = 0
+        var blackPieceCount = 0
+        for x in 0..<self.board.colum{
+            for y in 0..<self.board.rows{
+                let pieceType = self.board.getPieceAt(x: x, y: y)
+                if (pieceType == 1){
+                    // white piece
+                    whitePieceCount += 1
+                }
+                if (pieceType == 2){
+                    // black piece
+                    blackPieceCount += 1
+                }
+            }
+        }
         if colourBlind == false {
             colourSwitch.filename = "images/ColourBlindBW.png"
+            pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
             colourBlind = true
         }
         else if colourBlind == true {
             colourSwitch.filename = "images/ColourBlindRGB.png"
+            pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
             colourBlind = false
         }
     }
