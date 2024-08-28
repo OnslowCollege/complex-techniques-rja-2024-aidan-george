@@ -1,6 +1,5 @@
 
 <script lang="ts">
-    import Layout from "./+layout.svelte";
     import { cards } from "./cards";
     import { aces } from "./cards";
     import type { CardInfo } from "./cards";
@@ -16,6 +15,7 @@
         | "lost"
         | "draw"
         | "suitSelect"
+        | "pop-up"
 
     let state: State = 'start'
     let playerCardCount = 0;
@@ -33,7 +33,8 @@
     let lastCardActive = false;
     let helpActive = false;
     let pileCount = dealPile.length;
-    let pickupAlert = false
+    let pickupAlert = false;
+    let popUpActive = false;
     const suits: string[] = ['clubs', 'diamonds', 'hearts', 'spades'];
 
     /* Allow the user to pause the game */
@@ -55,6 +56,17 @@
         else {
             helpActive = false;
             state = "start"
+        }
+    }
+
+    function togglePopUp() {
+        if (popUpActive === false) {
+            popUpActive = true;
+            state = "pop-up";
+        }
+        else {
+            popUpActive = false;
+            state = "playerTurn";
         }
     }
 
@@ -108,6 +120,11 @@
 
         if (dealPile.length === 0) {
             gameDraw();
+            return;
+        }
+
+        if (playerCards.length === 0) {
+            gameWon(); // End the game if the player has no cards left
             return;
         }
 
@@ -253,6 +270,12 @@
             gameDraw()
             return;
         }
+
+        if (oppositionCards.length === 0) {
+            console.log('Opponent has no cards left');
+            gameLost(); // End the game if the opponent has no cards left
+            return; 
+        } 
     
         if (pickupAmount !== 0){
             if (currentCard.name === clicked.name) {
@@ -336,6 +359,8 @@
             return;
         }
 
+        lastCardActive = false;
+
         if (randomCard) {
             // Remove the card from the array
             dealPile = dealPile.filter(card => card !== randomCard);
@@ -371,10 +396,12 @@
         console.log(lastCardActive)
         console.log(playerCardCount)
         if (playerCardCount === 1 && !lastCardActive) {
+            togglePopUp();
             pickupAmount += 2
         }
         if (playerCardCount >= 2 && lastCardActive === true) {
             lastCardActive = false
+            
         }
     }
 
@@ -456,7 +483,7 @@
         
         Ace is used as a wild card and can be used on top of any other card. When a player plays an ace, they can use it to change the suit of the cards being played.
         
-        When a player has one remaining card in their hand they must say “Last Card.” If they do not, and they play their card on their next turn, they must pick up another 3 cards.
+        When a player has one remaining card in their hand they must say “Last Card.” They must do this before they play their 2nd to last card. If they do not, and they play their card on their next turn, they must pick up another 2 cards.
         
         The first person to get rid of their hand is the winner.
         
@@ -472,6 +499,16 @@
         Return
         </button>
         </div>
+{/if}
+
+{#if state === "pop-up"}
+    <div class="last-card-pop-up">
+        <h2>You did not press the last card button when you had 2 cards left and played one!</h2>
+        <p>Picking up 2 cards as a penalty.</p>
+        <button on:click={togglePopUp} class="return-button">
+        ok
+        </button>
+    </div>
 {/if}
 
 {#if state === "playerTurn"}
@@ -532,10 +569,11 @@
     </div>
     <button 
     on:click={handleLastCardClick}
-    class="last-card-button {lastCardActive ? 'clicked' : ''}" 
+    class="last-card-button {lastCardActive ? 'clicked' : ''}"
     disabled={playerCards.length !== 2} 
     >
         Last Card
+    <span class="tooltip">Click when you have 2 cards left and are about to place your 2nd to last card.</span>
     </button>
 {/if}
 
@@ -726,6 +764,12 @@
         gap: 8px;
     }
 
+    @keyframes flash {
+        0% {background-color: white;}
+        50% {background-color: red;}
+        100% {background-color: white;}
+    }
+
     .start-area {
         display: flex;
         flex-direction: column;
@@ -740,7 +784,7 @@
         align-items: center;
         gap: 1rem;
     }
-    .start-button, .help-button, .suit-select-button {
+    .start-button, .help-button {
         position: relative;
         padding: 2rem 2.5rem;
         font-size: 1.5rem;
@@ -763,7 +807,7 @@
         background-color: red;
     }
 
-    .help-screen {
+    .help-screen, .last-card-pop-up {
         position: fixed;
         top: 0;
         right: 0;
@@ -837,10 +881,36 @@
         display: inline-block;
     }
 
+    .last-card-button .tooltip {
+        visibility: hidden;
+        background-color: grey;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        right: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .last-card-button:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
     .last-card-button:disabled {
         background-color: grey;
         cursor: not-allowed;
     }
+
+    .last-card-button:not(:disabled) {
+    animation: flash 1s infinite;
+    }
+
 
     .last-card-button:not(:disabled):hover {
         background-color: red;
@@ -848,6 +918,7 @@
 
     .last-card-button.clicked {
         background-color: gold;
+        animation: none;
     }
 
 
