@@ -395,11 +395,11 @@ class ReversiApp : OCApp {
                     }
                     else if (pieceType == 1){
                         // green/player1
-                        tile.image.filename = "images/BlackLogo.png"
+                        tile.image.filename = "images/GreenLogo.png"
                     }
                     else if (pieceType == 2){
                         // red/player 2
-                        tile.image.filename = "images/WhiteLogo.png"
+                        tile.image.filename = "images/RedLogo.png"
                     }
                 }
                 else if colourBlind == false {
@@ -409,11 +409,11 @@ class ReversiApp : OCApp {
                     }
                     else if (pieceType == 1){
                         // green/player1
-                        tile.image.filename = "images/GreenLogo.png"
+                        tile.image.filename = "images/BlackLogo.png"
                     }
                     else if (pieceType == 2){
                         // red/player 2
-                        tile.image.filename = "images/RedLogo.png"
+                        tile.image.filename = "images/WhiteLogo.png"
                     }
                 }
             }
