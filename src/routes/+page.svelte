@@ -4,6 +4,7 @@
     import { aces } from "./cards";
     import type { CardInfo } from "./cards";
 
+    // Defining states for state management
     type State =
         | "start"
         | "playing"
@@ -17,11 +18,11 @@
         | "suitSelect"
         | "pop-up"
 
+    // Defining variables and constants 
     let state: State = 'start'
     let playerCardCount = 0;
     let turnCount: number = 0;
     let oppositionCardCount = 0;
-    let playerHandCards: number[] = [];
     let playerCards: CardInfo[] = [];
     let oppositionCards: CardInfo[] = [];
     let handLength: number = 7;
@@ -48,6 +49,7 @@
         }
     }
 
+    /* Toggles help screen on and off on press of buttons */
     function toggleHelpScreen() {
         if (helpActive === false) {
         helpActive = true;
@@ -59,6 +61,7 @@
         }
     }
 
+    /* Toggles last card penalty pop up screen after not checking */ 
     function togglePopUp() {
         if (popUpActive === false) {
             popUpActive = true;
@@ -71,7 +74,7 @@
     }
 
 
-
+    /* Returns a random card from the deck */
     function getRandomCard<T>(array: T[]): T | undefined {
         if (array.length === 0) {
             return undefined;
@@ -81,6 +84,7 @@
     }
     
 
+    /* Deals starting deck cards */
     function dealTrial() {
         // Player cards
         for (let i = 0; i < handLength; i++) {
@@ -107,19 +111,20 @@
 
     }
 
-
+    /* Handles click of last card button */
     function handleLastCardClick() {
         if (playerCards.length === 2) {
             lastCardActive = true
         }
     }
 
+    /* Logic for opponent CPU */
     function opponentTurn() {
 
-        pileCount = dealPile.length
+        pileCount = dealPile.length // Update deck counter
 
         if (dealPile.length === 0) {
-            gameDraw();
+            gameDraw(); // End the game if the deck has no cards left
             return;
         }
 
@@ -182,6 +187,7 @@
 
         console.log('Opponent played:', cardToPlay);
 
+        // Special card rules 
         if (cardToPlay.name === '2') {
             pickupAmount += 2
             console.log(pickupAmount)
@@ -192,7 +198,7 @@
         }
         if (cardToPlay.name === '10') {
             state = 'playing'
-            state = 'opponentTurn'
+            state = 'opponentTurn' 
             return
         }
         if (cardToPlay.name === 'ace') {
@@ -207,27 +213,10 @@
 
         // Transition back to the player's turn
         state = 'playerTurn';
-        turnCount++;
+        turnCount++; // Add to turn counter
     }
 
-    function pickupCheck() {
-        if (currentCard.name === "2" || currentCard.name === "5"){
-            if (playerCards.some(card => card.name === currentCard.name)) {
-                console.log("card available")
-            }
-            else {
-                console.log("no card available")
-                for (let i = 0; i < pickupAmount; i++) {
-                    pickup(playerCards)
-                }
-                currentCard.name = ""
-                pickupAmount = 0
-                state = "opponentTurn"
-                return
-            }
-        }
-    }
-
+    /* Logic for picking up automatically if the user has no usable cards */
     function autoPickup() {
         if (currentCard.name === "2" || currentCard.name === "5") {
             playableCards = playerCards.filter(card => 
@@ -247,7 +236,8 @@
         }
     }
 
-    function suitSelect(selectedSuit) {
+    /* Handles selecting a suit once playing an ace */
+    function suitSelect(selectedSuit: any) {
         const aces: CardInfo[] = cards.filter(obj => obj.name === "ace")
         const result = aces.find(obj => obj.suit === selectedSuit)
         if (result) {
@@ -258,7 +248,7 @@
 
     function playerTurn() {
 
-        pileCount = dealPile.length
+        pileCount = dealPile.length // Update deck counter
 
         // Check for win/loss conditions (e.g., if the player has no cards left)
         if (playerCards.length === 0) {
@@ -267,7 +257,7 @@
         }
 
         if (dealPile.length === 0) {
-            gameDraw()
+            gameDraw(); // End the game if the deck is empty
             return;
         }
 
@@ -304,6 +294,8 @@
             currentCard = clicked;
             console.log(clicked)
 
+            // Special card rules
+
             if (clicked.name === "2" || clicked.name === "5") {
                 pickupAmount += Number(clicked.name)
                 console.log(pickupAmount)
@@ -314,7 +306,7 @@
 
             if (clicked.name === '10') {
                 state = 'playerTurn'
-                turnCount++;
+                turnCount++; // Skip opponent turn and add to the turn count
                 lastCardCheck()
                 return
             }
@@ -324,10 +316,12 @@
                 return
             }
             state = "opponentTurn";
+            // Check status of last card button
             lastCardCheck();
         }
     }
 
+    /* Logic for setting up player to pick up a card */
     function playerPickup() {
         if (pickupAmount === 0 ){
             console.log('Player has no playable cards, must draw a card');
@@ -338,7 +332,7 @@
         } else {
             console.log('Player has no playable cards, must draw a card');
             for (let i = 0; i < pickupAmount; i++) {
-                pickup(playerCards)
+                pickup(playerCards) // Run pickup logic for player and not opponent
             }
             currentCard.name = ""
             lastCardCheck()
@@ -349,7 +343,7 @@
         }
     }
 
-
+    /* Logic for pick up of player and opponent */
     function pickup(competitor: CardInfo[]) {
 
         const randomCard: CardInfo | undefined = getRandomCard(dealPile)
@@ -359,7 +353,7 @@
             return;
         }
 
-        lastCardActive = false;
+        lastCardActive = false; // Disable last card 
 
         if (randomCard) {
             // Remove the card from the array
@@ -369,16 +363,17 @@
             pileCount = dealPile.length
 
             if (state === 'playerTurn') {
-                playerCardCount = playerCards.length
+                playerCardCount = playerCards.length // Update card counter for the player
                 console.log(playerCards)
             }
             else {
-                oppositionCardCount = oppositionCards.length
+                oppositionCardCount = oppositionCards.length // Update card counter for the opponent
                 console.log(oppositionCards)
             }
         }
     }
 
+    /* Adds card for the first card on the playing pile */
     function startCard() {
         const randomCard: CardInfo = getRandomCard(dealPile)
 
@@ -392,6 +387,7 @@
         }
     }
 
+    /* Checks if last card has been press prior to the player having one card left and applies penalty if so */
     function lastCardCheck() {
         console.log(lastCardActive)
         console.log(playerCardCount)
@@ -421,10 +417,12 @@
         state = "lost";
     }
 
+    /* When game is draw give option to reset */
     function gameDraw() {
         state = "draw";
     }
 
+    /* Checking if the state is "playerTurn" and running autopickup function if so */
     $: if (state === 'playerTurn') {
         console.log(state)
         setTimeout(() => {
@@ -432,6 +430,7 @@
         }, 2)
     }
 
+    /* Checking if the state is "opponentTurn" and setting a timeout */
     $: if (state === 'opponentTurn') {
         setTimeout(() => {
             opponentTurn();
@@ -440,16 +439,16 @@
 
     $: {lastCardCheck()}
 
-
-
 </script>
 
 <svelte:window on:keydown={pauseGame} />
 
+<!--Checks if game is paused and adds header text--> 
 {#if state === "paused"}
     <h1>Game paused</h1>
 {/if}
 
+<!--Checks if the game's state is start and creates the classes and buttons for the start screen-->
 {#if state === "start"}
     <div class="start-area">
     <h1>Last Card</h1>
@@ -463,14 +462,14 @@
         class="start-button">
         Start
     </button>
-    <button on:click={toggleHelpScreen} class="help-button">
+    <button on:click={toggleHelpScreen} class="help-button"> <!--Goes to help screen by toggling function-->
         Help
     </button>
     </div>
     </div>
     {/if}
 
-
+<!--Checks if the game's state is help and if so show help text and button to return-->
     {#if state === "help"}
     <div class="help-screen">
     <h1>Rules of Last Card</h1>
@@ -495,48 +494,50 @@
 
         If the deck empties and the game is therefore impossible to win, the game will be declared a draw.
     </p>
-        <button on:click={toggleHelpScreen} class="return-button">
+        <button on:click={toggleHelpScreen} class="return-button"> <!--Returns to start screen by toggling function-->
         Return
         </button>
         </div>
 {/if}
 
+<!--If state is "pop-up" then show text to inform user of penalty-->
 {#if state === "pop-up"}
     <div class="last-card-pop-up">
         <h2>You did not press the last card button when you had 2 cards left and played one!</h2>
         <p>Picking up 2 cards as a penalty.</p>
-        <button on:click={togglePopUp} class="return-button">
+        <button on:click={togglePopUp} class="return-button"> <!--Returns to playerTurn state as before-->
         ok
         </button>
     </div>
 {/if}
 
+<!--If state is "playerTurn" then add the interface and make the cards clickable-->
 {#if state === "playerTurn"}
     <div class="cards">
         {#each oppositionCards as oppositionHandCard}
         <button class="card">
-        <img src="/cards/backcard.png" alt="Back of card" />
+        <img src="/cards/backcard.png" alt="Back of card" /> <!--Shows back of card image for the opponents cards-->
         </button>
         {/each}
     </div>
     <div class="card-count">
-        <div class="card-counter">{oppositionCardCount}</div>
+        <div class="card-counter">{oppositionCardCount}</div> <!-- Shows number of opponent cards-->
     </div>
     <div>
         <h1 >player turn</h1>
         <h1>
-            turn: {turnCount}
+            turn: {turnCount} <!--Shows number of turns that have been played-->
         </h1>
     </div>
     <div class="center">
         <div class="pickup-area">
         {#if pickupAlert}
         <div class="pickup-alert">
-            <p>Player must pickup</p>
+            <p>Player must pickup</p> <!-- Alert if user has to pick up-->
         </div>
         {/if}
         <div class="pile-count">
-            <div class="pile-counter">{pileCount}</div>
+            <div class="pile-counter">{pileCount}</div> <!--Shows number of cards in the deck-->
         </div>
         <button on:click = {() => {
             playerPickup();
@@ -545,14 +546,14 @@
             <img src="/cards/backcard.png" alt="Pickup Card Pile" />
         </button>
         <button class="card">
-            <img src={currentCard?.image} alt={currentCard?.name} loading="lazy"/>
+            <img src={currentCard?.image} alt={currentCard?.name} loading="lazy"/> <!-- Loads card images for player and only loads the ones that are needed-->
         </button>
     </div>
     </div>
     <div class="cards">
-        {#each playerCards as playerHandCard}
+        {#each playerCards as playerHandCard} <!-- Adds clicked card to the clicked card variable and assigns it to the playing pile-->
             <button
-                on:click={() => (clicked = playerHandCard)}
+                on:click={() => (clicked = playerHandCard)} 
                 on:click={playerTurn}
                 class="card"
             >
@@ -565,19 +566,19 @@
         {/each}
     </div>
     <div class="card-count">
-        <div class="card-counter player-card-counter">{playerCardCount}</div>
-    </div>
+        <div class="card-counter player-card-counter">{playerCardCount}</div> <!-- Shows number of cards for the player-->
+    </div> <!-- Handles last card button press and checks if the button has been clicked or not to make responsive changes in the UI-->
     <button 
     on:click={handleLastCardClick}
     class="last-card-button {lastCardActive ? 'clicked' : ''}"
     disabled={playerCards.length !== 2} 
     >
         Last Card
-    <span class="tooltip">Click when you have 2 cards left and are about to place your 2nd to last card.</span>
+    <span class="tooltip">Click when you have 2 cards left and are about to place your 2nd to last card.</span> <!-- Information about the last card button on hover-->
     </button>
 {/if}
 
-
+<!--If state is "opponentTurn" then make the player's cards unclickable-->
 {#if state === 'opponentTurn'} 
     
     <div class="cards">
@@ -637,6 +638,7 @@
     </button>
 {/if}
 
+<!-- If state is "playing" shows standard base state where it is neither player's turn-->
 {#if state === "playing"}
     <div class="cards">
         {#each oppositionCards as oppositionHandCard}
@@ -682,6 +684,7 @@
     </div>
 {/if}
 
+<!--If state is "suitSelect" add suit select interface to let user select their suit-->
 {#if state === "suitSelect"}
     <div class="cards">
         {#each oppositionCards as oppositionHandCard}
@@ -715,16 +718,18 @@
     </div>
 {/if}
 
+<!-- If state is "won" show screen that says player has won-->
 {#if state === "won"}
     <div class ="win-screen">
         <h1>You Won!</h1>
         <h2>Press the retry button to play again</h2>
-        <button on:click={resetGame} class="retry-button">
+        <button on:click={resetGame} class="retry-button"> <!-- Reset game function called on press to reload game-->
             retry
             </button>
     </div>
 {/if}
 
+<!-- If state is "lost" show screen that says player has lost-->
 {#if state === "lost"}
     <div class ="loss-screen">
         <h1>You Lost!</h1>
@@ -735,6 +740,7 @@
     </div>
 {/if}
 
+<!-- If state is "draw" show screen that says player has drawn-->
 {#if state === "draw"}
     <div class ="draw-screen">
         <h1>You Drew!</h1>
@@ -764,7 +770,7 @@
         gap: 8px;
     }
 
-    @keyframes flash {
+    @keyframes flash { /* Animation for when last card button is active to make it more visible */
         0% {background-color: white;}
         50% {background-color: red;}
         100% {background-color: white;}
@@ -784,7 +790,7 @@
         align-items: center;
         gap: 1rem;
     }
-    .start-button, .help-button {
+    .start-button, .help-button { /* Centers and styles the buttons on the main menu */
         position: relative;
         padding: 2rem 2.5rem;
         font-size: 1.5rem;
@@ -798,16 +804,16 @@
         display: inline-block;
     }
 
-    .start-button:hover {
+    .start-button:hover { /* Makes start button golden on hover */
         background-color: gold;
     }
 
 
-    .help-button:hover {
+    .help-button:hover { /* Makes help button red on hover */
         background-color: red;
     }
 
-    .help-screen, .last-card-pop-up {
+    .help-screen, .last-card-pop-up { /* Style for the pop-up and help screens */
         position: fixed;
         top: 0;
         right: 0;
@@ -826,7 +832,7 @@
     }
 
 
-    .return-button, .retry-button {
+    .return-button, .retry-button { 
         position: fixed;
         bottom: 1rem;
         right: 1rem;    
@@ -858,7 +864,7 @@
         max-width: 90%;
         max-height: 90%;
     }
-    .card img {
+    .card img { /* Style for how the images of the cards display in the game */
         display: block;
         max-width: 100%;
         max-height: 100%;   
@@ -881,7 +887,7 @@
         display: inline-block;
     }
 
-    .last-card-button .tooltip {
+    .last-card-button .tooltip { /* Show information on the button and make it visible when hovered*/
         visibility: hidden;
         background-color: grey;
         color: white;
@@ -907,7 +913,7 @@
         cursor: not-allowed;
     }
 
-    .last-card-button:not(:disabled) {
+    .last-card-button:not(:disabled) { /* When button is enable play animation */
     animation: flash 1s infinite;
     }
 
