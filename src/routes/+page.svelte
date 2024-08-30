@@ -1,10 +1,11 @@
 
 <script lang="ts">
+    // import from cards.ts
     import { cards } from "./cards";
     import { aces } from "./cards";
     import type { CardInfo } from "./cards";
 
-    // Defining states for state management
+    // Defining possible states for the game
     type State =
         | "start"
         | "playing"
@@ -19,27 +20,28 @@
         | "pop-up"
 
     // Defining variables and constants 
-    let state: State = 'start'
-    let playerCardCount = 0;
-    let turnCount: number = 0;
-    let oppositionCardCount = 0;
-    let playerCards: CardInfo[] = [];
-    let oppositionCards: CardInfo[] = [];
-    let handLength: number = 7;
-    let clicked: CardInfo[] = [];
-    let currentCard: CardInfo[] = [];
-    let dealPile: CardInfo[] = cards;
-    let pickupAmount: number = 0;
-    let playableCards: CardInfo[] = [];
-    let lastCardActive = false;
-    let helpActive = false;
-    let pileCount = dealPile.length;
-    let pickupAlert = false;
-    let popUpActive = false;
-    const suits: string[] = ['clubs', 'diamonds', 'hearts', 'spades'];
+    let state: State = 'start' // Current state of the game
+    let playerCardCount = 0; // The amount of cards in the players hand
+    let oppositionCardCount = 0; // The amount of cards in the oppositions hand
+    let turnCount: number = 0; // The number of turns that have occured in the game
+    let playerCards: CardInfo[] = []; // The cards in the players hand
+    let oppositionCards: CardInfo[] = []; // The cards in the oppositions hand
+    let handLength: number = 7; // The length of a hand should start at 
+    let clicked: CardInfo[] = []; // The card selected by the player
+    let currentCard: CardInfo[] = []; // The current card that has been played
+    let dealPile: CardInfo[] = cards; // The cards in the pile that are not in play (yet to be dealt)
+    let pickupAmount: number = 0; // The amount of cards that will be picked up upon a player not being able to play
+    let playableCards: CardInfo[] = []; // The amount of cards in a players hand that can be played
+    let lastCardActive = false; // Whether the last card button has been clicked
+    let helpActive = false; // Whether the help button has been clicked
+    let pileCount = dealPile.length; // The amount of cards left that are available to be dealt
+    let pickupAlert = false; // Whether the player must pick up
+    let popUpActive = false; // Whether the pop up is active
+    const suits: string[] = ['clubs', 'diamonds', 'hearts', 'spades']; //  All the possible suits
 
     /* Allow the user to pause the game */
     function pauseGame(e: KeyboardEvent) {
+        // Toggle between "paused" and "playerTurn" states
         if (e.key === "Escape") {
             if (state === "playerTurn") {
                 state = "paused"
@@ -76,9 +78,11 @@
 
     /* Returns a random card from the deck */
     function getRandomCard<T>(array: T[]): T | undefined {
+        // Return undefined if deck is empty
         if (array.length === 0) {
             return undefined;
         }
+        // Generate random index
         const randomIndex = Math.floor(Math.random() * array.length);
         return array[randomIndex];
     }
@@ -86,7 +90,7 @@
 
     /* Deals starting deck cards */
     function dealTrial() {
-        // Player cards
+        // Deal Player cards
         for (let i = 0; i < handLength; i++) {
             const randomCard: CardInfo | undefined = getRandomCard(dealPile);
             if (randomCard) {
@@ -97,7 +101,7 @@
         }
         playerCardCount = playerCards.length
 
-        // Opposition cards
+        // Deal Opposition cards
         for (let i = 0; i < handLength; i++) {
             const randomCard: CardInfo | undefined = getRandomCard(dealPile);
             if (randomCard) {
@@ -106,6 +110,7 @@
                 oppositionCards.push(randomCard);
             }
         }
+        // Calculate the total cards in each players hand
         oppositionCardCount = oppositionCards.length
         pileCount = dealPile.length;
 
@@ -120,23 +125,25 @@
 
     /* Logic for opponent CPU */
     function opponentTurn() {
+        // Update deck counter
+        pileCount = dealPile.length 
 
-        pileCount = dealPile.length // Update deck counter
-
+        // End the game if the deck has no cards left
         if (dealPile.length === 0) {
-            gameDraw(); // End the game if the deck has no cards left
+            gameDraw(); 
             return;
         }
 
+        // End the game if the player has no cards left
         if (playerCards.length === 0) {
-            gameWon(); // End the game if the player has no cards left
+            gameWon(); 
             return;
         }
 
-        // Check if the opponent has any cards left
+        // End the game if the opponent has no cards left
         if (oppositionCards.length === 0) {
             console.log('Opponent has no cards left');
-            gameLost(); // End the game if the opponent has no cards left
+            gameLost(); 
             return; 
         } 
 
@@ -156,19 +163,18 @@
             if (pickupAmount === 0 ){
                 console.log('Opponent has no playable cards, must draw a card');
                 pickup(oppositionCards)
-                // For simplicity, we'll skip drawing a card in this example
-                state = 'playerTurn'; // End the opponent's turn if they have no playable cards
+                state = 'playerTurn';
                 turnCount++;
                 return;
             } else {
+                // Opponent must pick up multiple cards
                 console.log('Opponent has no playable cards, must draw a card');
                 for (let i = 0; i < pickupAmount; i++) {
                     pickup(oppositionCards)
                 }
                 currentCard.name = ""
                 pickupAmount = 0
-                // For simplicity, we'll skip drawing a card in this example
-                state = 'playerTurn'; // End the opponent's turn if they have no playable cards
+                state = 'playerTurn'; 
                 turnCount++;
                 return;
             }
@@ -247,31 +253,35 @@
 
 
     function playerTurn() {
-
-        pileCount = dealPile.length // Update deck counter
+        // Update deck counter
+        pileCount = dealPile.length
 
         // Check for win/loss conditions (e.g., if the player has no cards left)
         if (playerCards.length === 0) {
-            gameWon(); // End the game if the player has no cards left
+            gameWon();
             return;
         }
 
+        // End the game if the deck is empty
         if (dealPile.length === 0) {
-            gameDraw(); // End the game if the deck is empty
+            gameDraw();
             return;
         }
 
+        // End the game if the opponent has no cards left
         if (oppositionCards.length === 0) {
             console.log('Opponent has no cards left');
-            gameLost(); // End the game if the opponent has no cards left
+            gameLost(); 
             return; 
         } 
-    
+
+        // Check if the selected card can be played
         if (pickupAmount !== 0){
             if (currentCard.name === clicked.name) {
                 currentCard = clicked;
                 state = "opponentTurn";
 
+                // Remove played card for the players cards
                 playerCards = playerCards.filter(card => card !== clicked);
                 playerCardCount = playerCards.length;
                 
@@ -323,22 +333,21 @@
 
     /* Logic for setting up player to pick up a card */
     function playerPickup() {
+        // Player must pickup cards
         if (pickupAmount === 0 ){
             console.log('Player has no playable cards, must draw a card');
             pickup(playerCards)
-            // For simplicity, we'll skip drawing a card in this example
-            state = 'opponentTurn'; // End the player's turn if they have no playable cards
+            state = 'opponentTurn';
             return;
         } else {
             console.log('Player has no playable cards, must draw a card');
             for (let i = 0; i < pickupAmount; i++) {
-                pickup(playerCards) // Run pickup logic for player and not opponent
+                pickup(playerCards)
             }
             currentCard.name = ""
             lastCardCheck()
             pickupAmount = 0
-            // For simplicity, we'll skip drawing a card in this example
-            state = 'opponentTurn'; // End the player's turn if they have no playable cards
+            state = 'opponentTurn'; 
             return;
         }
     }
@@ -353,7 +362,8 @@
             return;
         }
 
-        lastCardActive = false; // Disable last card 
+        // Disable last card button
+        lastCardActive = false;
 
         if (randomCard) {
             // Remove the card from the array
@@ -363,11 +373,13 @@
             pileCount = dealPile.length
 
             if (state === 'playerTurn') {
-                playerCardCount = playerCards.length // Update card counter for the player
+                // Update card counter for the player
+                playerCardCount = playerCards.length
                 console.log(playerCards)
             }
             else {
-                oppositionCardCount = oppositionCards.length // Update card counter for the opponent
+                // Update card counter for the opponent
+                oppositionCardCount = oppositionCards.length
                 console.log(oppositionCards)
             }
         }
@@ -903,12 +915,12 @@
         transition: opacity 0.3s;
     }
 
-    .last-card-button:hover .tooltip {
+    .last-card-button:hover .tooltip { /* Make the last card button change colour when the user hovers over */
         visibility: visible;
         opacity: 1;
     }
 
-    .last-card-button:disabled {
+    .last-card-button:disabled { /* How the last card button appears when disabled */
         background-color: grey;
         cursor: not-allowed;
     }
