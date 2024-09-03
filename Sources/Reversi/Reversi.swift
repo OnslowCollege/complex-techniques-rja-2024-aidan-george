@@ -530,12 +530,12 @@ class ReversiApp : OCApp {
         }
         if self.colourBlind == false {
             self.colourSwitch.filename = "images/ColourBlindBW.png"
-            self.pieceCountLabel.text = "Black: \(self.whitePieceCount)  White: \(self.blackPieceCount)"
+            self.pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
             self.colourBlind = true
         }
         else if self.colourBlind == true {
             self.colourSwitch.filename = "images/ColourBlindRGB.png"
-            self.pieceCountLabel.text = "Green: \(self.whitePieceCount)  Red: \(self.blackPieceCount)"
+            self.pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
             self.colourBlind = false
         }
         redrawTiles()
@@ -549,7 +549,7 @@ class ReversiApp : OCApp {
         self.RulesButton.onClick(self.RulesButtonPressed)
 
         // Event for when the "colourSwitch" button is pressed.
-        self.colourSwitch.onClick(self.ColourSwitchPressed)
+        self.colourSwitch.onClick(ColourSwitchPressed)
 
         // self.RulesButton.onClick({ button in
         //     self.RulesDialog.show(in: app)
