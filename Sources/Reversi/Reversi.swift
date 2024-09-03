@@ -476,7 +476,42 @@ class ReversiApp : OCApp {
         
     }
 
-    /// Event function for when the "ColourSwitch" button is pressed.
+    // /// Event function for when the "ColourSwitch" button is pressed.
+    // func ColourSwitchPressed(button: OCControlClickable) {
+    //     var whitePieceCount = 0
+    //     var blackPieceCount = 0
+    //     for x in 0..<self.board.colum{
+    //         for y in 0..<self.board.rows{
+    //             let pieceType = self.board.getPieceAt(x: x, y: y)
+    //             if (pieceType == 1){
+    //                 // white piece
+    //                 whitePieceCount += 1
+    //             }
+    //             if (pieceType == 2){
+    //                 // black piece
+    //                 blackPieceCount += 1
+    //             }
+    //         }
+    //     }
+    //     if colourBlind == false {
+    //         colourSwitch.filename = "images/ColourBlindBW.png"
+    //         pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
+    //         colourBlind = true
+    //     }
+    //     else if colourBlind == true {
+    //         colourSwitch.filename = "images/ColourBlindRGB.png"
+    //         pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
+    //         colourBlind = false
+    //     }
+    //     redrawTiles()
+    // }
+
+
+    override open func main(app: OCAppDelegate) -> OCControl {
+
+        //self.RulesDialog.addField(key: "image", field: OCImageView(filename: "images/fun.png"))
+
+        /// Event function for when the "ColourSwitch" button is pressed.
     func ColourSwitchPressed(button: OCControlClickable) {
         var whitePieceCount = 0
         var blackPieceCount = 0
@@ -493,23 +528,18 @@ class ReversiApp : OCApp {
                 }
             }
         }
-        if colourBlind == false {
-            colourSwitch.filename = "images/ColourBlindBW.png"
-            pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
-            colourBlind = true
+        if self.colourBlind == false {
+            self.colourSwitch.filename = "images/ColourBlindBW.png"
+            self.pieceCountLabel.text = "Black: \(self.whitePieceCount)  White: \(self.blackPieceCount)"
+            self.colourBlind = true
         }
-        else if colourBlind == true {
-            colourSwitch.filename = "images/ColourBlindRGB.png"
-            pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
-            colourBlind = false
+        else if self.colourBlind == true {
+            self.colourSwitch.filename = "images/ColourBlindRGB.png"
+            self.pieceCountLabel.text = "Green: \(self.whitePieceCount)  Red: \(self.blackPieceCount)"
+            self.colourBlind = false
         }
         redrawTiles()
     }
-
-
-    override open func main(app: OCAppDelegate) -> OCControl {
-
-        //self.RulesDialog.addField(key: "image", field: OCImageView(filename: "images/fun.png"))
         
 
         // Event for when the "ResetButton" button is pressed.
