@@ -310,11 +310,13 @@ class ReversiApp : OCApp {
     // Dialog for displaying rules.
     let RulesDialog: OCDialog = OCDialog(title: "Rules", message: "")
 
-    let Rules1: OCImageView = OCImageView(filename: "images/Reversi_0007.png")
+    let Rules: OCImageView = OCImageView(filename: "images/Reversi_Rules.png")
 
-    let Rules2: OCImageView = OCImageView(filename: "images/Reversi_0008.png")
+    // let Rules1: OCImageView = OCImageView(filename: "images/Reversi_0007.png")
 
-    let Rules3: OCImageView = OCImageView(filename: "images/Reversi_0009.png")
+    // let Rules2: OCImageView = OCImageView(filename: "images/Reversi_0008.png")
+
+    // let Rules3: OCImageView = OCImageView(filename: "images/Reversi_0009.png")
 
     var rulesShown: Bool = false
 
@@ -460,16 +462,18 @@ class ReversiApp : OCApp {
     /// Event function for when the "RulesButton" button is pressed.
     func RulesButtonPressed(button: OCControlClickable) {
         if rulesShown == false {
-            Rules1.visible = true
-            Rules2.visible = true
-            Rules3.visible = true
+            Rules.visible = true
+            // Rules1.visible = true
+            // Rules2.visible = true
+            // Rules3.visible = true
             rules.visible = true
             rulesShown = true
         }
         else if rulesShown == true {
-            Rules1.visible = false
-            Rules2.visible = false
-            Rules3.visible = false
+            Rules.visible = false
+            // Rules1.visible = false
+            // Rules2.visible = false
+            // Rules3.visible = false
             rules.visible = false
             rulesShown = false
         }
@@ -510,36 +514,6 @@ class ReversiApp : OCApp {
     override open func main(app: OCAppDelegate) -> OCControl {
 
         //self.RulesDialog.addField(key: "image", field: OCImageView(filename: "images/fun.png"))
-
-        /// Event function for when the "ColourSwitch" button is pressed.
-    func ColourSwitchPressed(button: OCControlClickable) {
-        var whitePieceCount = 0
-        var blackPieceCount = 0
-        for x in 0..<self.board.colum{
-            for y in 0..<self.board.rows{
-                let pieceType = self.board.getPieceAt(x: x, y: y)
-                if (pieceType == 1){
-                    // white piece
-                    whitePieceCount += 1
-                }
-                if (pieceType == 2){
-                    // black piece
-                    blackPieceCount += 1
-                }
-            }
-        }
-        if self.colourBlind == false {
-            self.colourSwitch.filename = "images/ColourBlindBW.png"
-            self.pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
-            self.colourBlind = true
-        }
-        else if self.colourBlind == true {
-            self.colourSwitch.filename = "images/ColourBlindRGB.png"
-            self.pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
-            self.colourBlind = false
-        }
-        redrawTiles()
-    }
         
 
         // Event for when the "ResetButton" button is pressed.
@@ -549,15 +523,16 @@ class ReversiApp : OCApp {
         self.RulesButton.onClick(self.RulesButtonPressed)
 
         // Event for when the "colourSwitch" button is pressed.
-        self.colourSwitch.onClick(ColourSwitchPressed)
+        // self.colourSwitch.onClick(ColourSwitchPressed)
 
         // self.RulesButton.onClick({ button in
         //     self.RulesDialog.show(in: app)
         // })
 
-        Rules1.visible = false
-        Rules2.visible = false
-        Rules3.visible = false
+        Rules.visible = false
+        // Rules1.visible = false
+        // Rules2.visible = false
+        // Rules3.visible = false
 
         self.RulesDialog.onConfirm({ button in
             self.rulesText.text = "Ok"
@@ -584,12 +559,44 @@ class ReversiApp : OCApp {
             }
             buttonRows.append(OCHBox(controls: controlsRow))
         }
-        rules = OCVBox(controls: [Rules1, Rules2, Rules3])
+        rules = OCVBox(controls: [Rules])
         let Grid = OCVBox(controls: buttonRows)
         let ControlRow = OCHBox(controls: [RulesButton, ResetButton, ModeDropDown, colourSwitch])
         let Program = OCVBox(controls: [pieceCountLabel, winnerStatusLabel, Grid, ControlRow])
         let ProgramFull = OCVBox(controls: [Program, rules])
-        Grid.setStyle(OCStyle.backgroundColor(OCColor.grey))
+        Grid.setStyle(OCStyle.backgroundColor(OCColor.antiqueWhite))
+        
+        func ColourSwitchPressed(button: OCControlClickable) {
+        var whitePieceCount = 0
+        var blackPieceCount = 0
+        for x in 0..<self.board.colum{
+            for y in 0..<self.board.rows{
+                let pieceType = self.board.getPieceAt(x: x, y: y)
+                if (pieceType == 1){
+                    // white piece
+                    whitePieceCount += 1
+                }
+                if (pieceType == 2){
+                    // black piece
+                    blackPieceCount += 1
+                }
+            }
+        }
+        if self.colourBlind == false {
+            self.colourSwitch.filename = "images/ColourBlindBW.png"
+            self.pieceCountLabel.text = "Black: \(whitePieceCount)  White: \(blackPieceCount)"
+            self.colourBlind = true
+            Grid.setStyle(OCStyle.backgroundColor(OCColor.gray))
+        }
+        else if self.colourBlind == true {
+            self.colourSwitch.filename = "images/ColourBlindRGB.png"
+            self.pieceCountLabel.text = "Green: \(whitePieceCount)  Red: \(blackPieceCount)"
+            self.colourBlind = false
+            Grid.setStyle(OCStyle.backgroundColor(OCColor.antiqueWhite))
+        }
+        redrawTiles()
+    }
+    self.colourSwitch.onClick(ColourSwitchPressed)
         rules.visible = false
         return ProgramFull
     }
