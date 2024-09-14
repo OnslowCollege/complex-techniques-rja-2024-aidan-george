@@ -286,9 +286,31 @@ func easyAI(board: Board) -> [Int]{
     return legalMoves[Int.random(in: 0..<legalMoves.count)]
 }
 
+func getAIMove(board: Board, aiNumber: Int) -> [Int]{
+    /// returns the move of the ai at difficulty aiNumber. If not a valid ai then return [-1, -1]
+    switch aiNumber{
+            // easy ai
+        case 1:
+            print("easy ai")
+            return easyAIGetBestMove(board: board)
+        case 2:
+            print("medium ai")
+            return mediumAIGetBestMove(board: board)
+        case 3:
+            // hard ai
+            print("hard ai")
+            return hardAIGetBestMove(board: board)
+        // player vs player
+        default:
+            print("player vs player")
+            return [-1, -1]
+    }
+}
+
+// AI Mode
+var aiMode: Int = 0
 
 class ReversiApp : OCApp {
-
     // Button for resetting the board.
     let ResetButton: OCButton = OCButton(text: "Reset Board")
 
@@ -334,8 +356,17 @@ class ReversiApp : OCApp {
 
         func onPress(tile: OCControlClickable){
             print("was clicked on \(self.x), \(self.y)")
-            if (self.app.board.isLegalMove(x: x, y: y, whitePiece: self.app.board.playerTurn)){
-                self.app.board.doMove(x: x, y: y)
+            if aiMode == 1 || aiMode == 2 || aiMode == 3 {
+                if (self.app.board.isLegalMove(x: x, y: y, whitePiece: self.app.board.playerTurn)){
+                    self.app.board.doMove(x: x, y: y)
+                }
+                let AiMove = getAIMove(board: self.app.board, aiNumber: aiMode)
+                self.app.board.doMove(x: AiMove[0], y: AiMove[1])
+            }
+            else {
+                if (self.app.board.isLegalMove(x: x, y: y, whitePiece: self.app.board.playerTurn)){
+                    self.app.board.doMove(x: x, y: y)
+                }
             }
             self.app.redrawTiles()
             app.board.checkIsGameOver()
@@ -480,8 +511,17 @@ class ReversiApp : OCApp {
         
     }
 
-    func ModeDropDownChanged() {
-
+    func ModeDropDownChanged(dropDown: any OCControlChangeable, item: OCDropDownItem) {
+        let SelectedMode = ModeDropDown.selectedItem!
+        if SelectedMode.text == "Easy" {
+            aiMode = 1
+        }
+        else if SelectedMode.text == "Medium" {
+            aiMode = 2
+        }
+        else if SelectedMode.text == "Hard" {
+            aiMode = 3
+        }
     }
 
     // /// Event function for when the "ColourSwitch" button is pressed.
