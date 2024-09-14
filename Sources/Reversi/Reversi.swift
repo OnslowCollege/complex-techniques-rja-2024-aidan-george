@@ -299,7 +299,7 @@ class ReversiApp : OCApp {
     var winnerStatusLabel: OCLabel = OCLabel(text: "")
 
     // Dropdown for changing modes.
-    let ModeDropDown: OCDropDown = OCDropDown(fromArray: ["Versus", "Easy", "Hard"])
+    let ModeDropDown: OCDropDown = OCDropDown(fromArray: ["Versus", "Easy", "Medium", "Hard"])
 
     // Button for opening the rules.
     let RulesButton: OCButton = OCButton(text: "Rules")
@@ -480,6 +480,10 @@ class ReversiApp : OCApp {
         
     }
 
+    func ModeDropDownChanged() {
+
+    }
+
     // /// Event function for when the "ColourSwitch" button is pressed.
     // func ColourSwitchPressed(button: OCControlClickable) {
     //     var whitePieceCount = 0
@@ -521,6 +525,8 @@ class ReversiApp : OCApp {
         
         // Event for when the "RulesButton" button is pressed.
         self.RulesButton.onClick(self.RulesButtonPressed)
+
+        self.ModeDropDown.onChange(self.ModeDropDownChanged)
 
         // Event for when the "colourSwitch" button is pressed.
         // self.colourSwitch.onClick(ColourSwitchPressed)
