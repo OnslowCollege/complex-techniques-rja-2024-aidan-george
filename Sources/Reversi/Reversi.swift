@@ -267,7 +267,7 @@ struct Board{
         let legalMoves = self.getLegalMoves()
         if (!self.isGameOver() && legalMoves.count == 0){
             // there are no legal moves so skip this players turn
-            self.playerTurn = !self.playerTurn
+            // self.playerTurn = !self.playerTurn  --------- Commented out because messes with ai
         }
 
     }
