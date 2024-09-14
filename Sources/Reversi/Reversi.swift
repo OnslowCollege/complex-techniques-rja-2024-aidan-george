@@ -267,7 +267,7 @@ struct Board{
         let legalMoves = self.getLegalMoves()
         if (!self.isGameOver() && legalMoves.count == 0){
             // there are no legal moves so skip this players turn
-            // self.playerTurn = !self.playerTurn  --------- Commented out because messes with ai
+            // self.playerTurn = !self.playerTurn
         }
 
     }
@@ -357,11 +357,14 @@ class ReversiApp : OCApp {
         func onPress(tile: OCControlClickable){
             print("was clicked on \(self.x), \(self.y)")
             if aiMode == 1 || aiMode == 2 || aiMode == 3 {
+                let PlayerLegalMove = self.app.board.isLegalMove(x: x, y: y, whitePiece: self.app.board.playerTurn)
                 if (self.app.board.isLegalMove(x: x, y: y, whitePiece: self.app.board.playerTurn)){
                     self.app.board.doMove(x: x, y: y)
                 }
+                if PlayerLegalMove == true {
                 let AiMove = getAIMove(board: self.app.board, aiNumber: aiMode)
                 self.app.board.doMove(x: AiMove[0], y: AiMove[1])
+                }
             }
             else {
                 if (self.app.board.isLegalMove(x: x, y: y, whitePiece: self.app.board.playerTurn)){
