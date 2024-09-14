@@ -515,6 +515,9 @@ class ReversiApp : OCApp {
     }
 
     func ModeDropDownChanged(dropDown: any OCControlChangeable, item: OCDropDownItem) {
+        board.reset()
+        redrawTiles()
+        winnerStatusLabel.text = ""
         let SelectedMode = ModeDropDown.selectedItem!
         if SelectedMode.text == "Easy" {
             aiMode = 1
